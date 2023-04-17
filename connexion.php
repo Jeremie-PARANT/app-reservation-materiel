@@ -8,6 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+<?php 
+include_once('includes/header_authentication.php'); 
+?>
     <form method="post">
         <div class="form_block">
        <div class="form_txt">Mail :</div><input type="text">
@@ -16,13 +19,10 @@
         <input type="submit" value="Se connecter">
     </form>
 
-<?php 
+    <?php
 
-include_once('includes/header_authentication.php'); 
-
-
-
-?>
+    
+    ?>
 
 </body>
 </html>
