@@ -12,7 +12,6 @@
     <form action="inscription.php" method="post">
     <div class="form_bloc">
         <div class="form_txt">Prénom :</div><input type="text" name="prenom">
-        <h1>Titre</h1>
         <?php
         if (empty($_POST['prenom'])) {
         echo "vide";
