@@ -20,11 +20,15 @@ include_once('includes/header_authentication.php');
     </form>
 
     <?php
-    if (empty($_POST['mail']) && empty($_POST['mail'])) {
+    
+    if (!empty($_POST['mail']) && !empty($_POST['mail'])) {
     $mail = $_POST ['mail'];
     $mpd = $_POST ['mdp'];
+    }
+    else {
     echo "t une merde";
     }
+    
     ?>
 
 </body>
