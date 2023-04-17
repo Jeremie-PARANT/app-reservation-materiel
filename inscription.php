@@ -28,6 +28,7 @@
     </div>
     </form>
     <?php
+    
     /*
     if (!empty($_POST['prenom']) && !empty($_POST['nom']) && !empty($_POST['naissance']) && !empty($_POST['email']) && !empty($_POST['mdp'])) {
         $prenom = $_POST['prenom'] ;
