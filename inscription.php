@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php include_once('includes/header_authentication.php'); ?>
     <form action="">
     <div class="form_bloc">
         <div class="form_txt">Prénom :</div><input type="text">
@@ -15,6 +16,7 @@
         <div class="form_txt">Date de naissance :</div><input type="text">
         <div class="form_txt">Email :</div><input type="text">
         <div class="form_txt">Mot de passe :</div><input type="text">
+        </div><input type="submit">
     </div>
     </form>
 </body>
