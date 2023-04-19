@@ -13,15 +13,15 @@
     <form action="inscription.php" method="post">
     <div class="form_bloc">
         <div class="form_txt">Prénom :</div><input type="text" name="prenom">
-        <?php prenom($_POST['prenom']); //vérifie erreur de prenom ?>
+        <?php prenom(); //vérifie erreur de prenom ?>
         <div class="form_txt">Nom :</div><input type="text" name="nom">
-        <?php nom($_POST['nom']); //vérifie erreur de nom ?>
+        <?php nom(); //vérifie erreur de nom ?>
         <div class="form_txt">Date de naissance :</div><input type="date" name="naissance">
-        <?php naissance($_POST['naissance']); //vérifie erreur de naissance ?>
+        <?php naissance(); //vérifie erreur de naissance ?>
         <div class="form_txt">Email :</div><input type="text" name="email">
-        <?php email($_POST['email']); //vérifie erreur de email ?>
+        <?php email(); //vérifie erreur de email ?>
         <div class="form_txt">Mot de passe :</div><input type="password" name="mdp">
-        <?php mdp($_POST['mdp']); //vérifie erreur de email ?>
+        <?php mdp(); //vérifie erreur de email ?>
         <input type="submit">
     </div>
     </form>

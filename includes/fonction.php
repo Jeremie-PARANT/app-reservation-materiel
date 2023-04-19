@@ -107,7 +107,7 @@ function mdp (){
             echo '<div class="erreur"> Votre mdp est trop court </div>';
         }
         elseif (strlen($mdp)>100) {
-            echo '<div class="erreur"> Votre mdp est trop long </div>';
+            echo '<div class="erreur"> Votre email est trop long </div>';
         }
         else {
             return true;
