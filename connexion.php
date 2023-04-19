@@ -20,14 +20,32 @@ include_once('includes/header_authentication.php');
     </form>
 
     <?php
+   
     
-    if (!empty($_POST['mail']) && !empty($_POST['mail'])) {
+    if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
     $mail = $_POST ['mail'];
     $mpd = $_POST ['mdp'];
     }
     else {
     echo "t une merde";
     }
+
+
+    try{
+    $db = new PDO(
+        'mysql:host=localhost;dbname=sae_203;charset=utf8','root'
+    );
+    $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch(Exception $e){
+    die(print_r($e));
+}
+$result = $db->query("SELECT mail FROM utilisateurs");
+$resultmdp = $db->query("SELECT mdp FROM utilisateurs");
+while ($data = $result->fetch()){
+if ($_POST ['mail']== $result && $_POST ['mdp'] == $resultmdp );
+echo "vous etes connecté";
+}
     
     ?>
 
