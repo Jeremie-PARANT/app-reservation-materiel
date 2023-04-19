@@ -35,7 +35,7 @@
             echo 'vous etes inscript';
             $link = mysqli_connect("localhost","root","","temp") ;
             $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
-            mysqli_query($link, $query) ;
+            mysqli_query($link, $query);
         }
     ?>
 </body>
