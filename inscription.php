@@ -12,19 +12,20 @@
     <?php include_once('includes/fonction.php'); ?>
     <form action="inscription.php" method="post">
     <div class="form_bloc">
-        <div class="form_txt">Prénom :</div><input type="text" name="prenom">
+        <div class="form_txt">Prénom :</div><input type="text" name="prenom" required>
         <?php prenom(); //vérifie erreur de prenom ?>
-        <div class="form_txt">Nom :</div><input type="text" name="nom">
+        <div class="form_txt">Nom :</div><input type="text" name="nom" required>
         <?php nom(); //vérifie erreur de nom ?>
-        <div class="form_txt">Date de naissance :</div><input type="date" name="naissance">
+        <div class="form_txt">Date de naissance :</div><input type="date" name="naissance" required>
         <?php naissance(); //vérifie erreur de naissance ?>
-        <div class="form_txt">Email :</div><input type="text" name="email">
+        <div class="form_txt">Email :</div><input type="text" name="email" required>
         <?php email(); //vérifie erreur de email ?>
-        <div class="form_txt">Mot de passe :</div><input type="password" name="mdp">
+        <div class="form_txt">Mot de passe :</div><input type="password" name="mdp" required>
         <?php mdp(); //vérifie erreur de email ?>
         <input type="submit">
     </div>
     </form>
+    <br/>
     <?php
         if (prenom()==true && nom()==true && naissance()==true && email()==true && mdp()==true) {
             $prenom = $_POST['prenom'];
