@@ -21,32 +21,25 @@ include_once('includes/header_authentication.php');
 
     <?php
    
-    
-    if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
-    $mail = $_POST ['mail'];
-    $mpd = $_POST ['mdp'];
-    }
-    else {
-    echo "t une merde";
-    }
+session_start();
 
+   $link = mysqli_connect("localhost", "root", "", "sae_203");
 
-    try{
-    $db = new PDO(
-        'mysql:host=localhost;dbname=sae_203;charset=utf8','root'
-    );
-    $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch(Exception $e){
-    die(print_r($e));
-}
-$result = $db->query("SELECT mail FROM utilisateurs");
-$resultmdp = $db->query("SELECT mdp FROM utilisateurs");
-while ($data = $result->fetch()){
-if ($_POST ['mail']== $result && $_POST ['mdp'] == $resultmdp );
-echo "vous etes connecté";
-}
-    
+   if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
+       $mail = $_POST['mail'];
+       $mdp = $_POST['mdp'];
+       $result = mysqli_query($link, "SELECT mail, mdp FROM utilisateurs WHERE mail='$mail'");
+       $row = mysqli_fetch_assoc($result);
+       if ($row && $row['mail'] == $mail && $row['mdp'] == $mdp) {
+            $_SESSION['mail'] = $mail;
+            header("location: accueil");
+           
+       } else {
+           echo "Mail ou mot de passe incorrect";
+       }
+   }
+   
+   
     ?>
 
 </body>
