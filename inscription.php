@@ -38,6 +38,6 @@
             mysqli_query($link, $query);
         }
     ?>
-    <?php include_once('includes/header_authentication.php'); ?>
+
 </body>
 </html>
