@@ -20,11 +20,26 @@ include_once('includes/header_authentication.php');
     </form>
 
     <?php
-    if (empty($_POST['mail']) && empty($_POST['mail'])) {
-    $mail = $_POST ['mail'];
-    $mpd = $_POST ['mdp'];
-    echo "t une merde";
-    }
+   
+session_start();
+
+   $link = mysqli_connect("localhost", "root", "", "sae_203");
+
+   if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
+       $mail = $_POST['mail'];
+       $mdp = $_POST['mdp'];
+       $result = mysqli_query($link, "SELECT mail, mdp FROM utilisateurs WHERE mail='$mail'");
+       $row = mysqli_fetch_assoc($result);
+       if ($row && $row['mail'] == $mail && $row['mdp'] == $mdp) {
+            $_SESSION['mail'] = $mail;
+            header("location: accueil");
+           
+       } else {
+           echo "Mail ou mot de passe incorrect";
+       }
+   }
+   
+   
     ?>
 
 </body>
