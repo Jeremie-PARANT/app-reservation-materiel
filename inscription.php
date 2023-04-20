@@ -24,8 +24,8 @@
             <input type="date" name="naissance" required="required">
             <?php naissance($_POST['naissance']); //vérifie erreur de naissance ?>
             <span class="form_txt">Email :</span>
-            <input type="text" name="email" required="required">
-            <?php email($_POST['email']); //vérifie erreur de email ?>
+            <input type="text" name="mail" required="required">
+            <?php email($_POST['mail']); //vérifie erreur de email ?>
             <span class="form_txt">Mot de passe :</span>
             <input type="password" name="mdp" required="required">
             <?php mdp($_POST['mdp']); //vérifie erreur de email ?>
