@@ -11,7 +11,7 @@ function prenom (){
 
     }
         else if (!empty($_POST['prenom'])) {
-        $prenom = $_POST['prenom'];
+        $prenom = strip_tags($_POST['prenom']);
             if (strlen($prenom)<3) {
                 echo '<div class="erreur"> Votre prenom est trop court </div>';
             }
@@ -35,7 +35,7 @@ function nom (){
 
     }
         else if (!empty($_POST['nom'])) {
-        $nom = $_POST['nom'];
+        $nom = strip_tags($_POST['nom']);
         if (strlen($nom)<3) {
             echo '<div class="erreur"> Votre nom est trop court </div>';
         }
@@ -60,7 +60,7 @@ function naissance (){
 
     }
         else if (!empty($_POST['naissance'])) {
-        $naissance = $_POST['naissance'];
+        $naissance = strip_tags($_POST['naissance']);
         $today = date("Y-m-d H:i:s");
         if(!checkdate($naissance[0-4], $naissance[5-6], $naissance[7-8])==true){
             echo '<div class="erreur"> pas une date ou voyage dans le temps </div>';
@@ -82,17 +82,17 @@ function email (){
 
     }
         else if (!empty($_POST['email'])) {
-        $email = $_POST['email'];
+        $email = strip_tags($_POST['email']);
         if (strlen($email)<3) {
             echo '<div class="erreur"> Votre email est trop court </div>';
         }
         elseif (strlen($email)>100) {
             echo '<div class="erreur"> Votre email est trop long </div>';
         }
-        elseif (!preg_match('#@#',$email)===true) {
+        elseif (!preg_match('#@#',$email)) {
             echo '<div class="erreur"> L\'email ne contient pas @ </div>';
         }
-        elseif (!preg_match("#^[a-zA-Z0-9!\#\$%&'*+-/=?^_`{|}~.@]+$#",$email)===true) {
+        elseif (!preg_match("#^[a-zA-Z0-9@!%&'*+-/=?^_`{|}~.\$\#]+$#",$email)) {
             echo '<div class="erreur"> L\'email contient des caractères non autorisé </div>';
         }
         else {
@@ -106,15 +106,16 @@ function mdp (){
 
     }
         else if (!empty($_POST['mdp'])) {
-        $mdp = $_POST['mdp'];
+        $mdp = strip_tags($_POST['mdp']);
         if (strlen($mdp)<8) {
             echo '<div class="erreur"> Votre mdp est trop court </div>';
         }
         elseif (strlen($mdp)>100) {
             echo '<div class="erreur"> Votre mdp est trop long </div>';
         }
-        elseif (!preg_match("#^[a-zA-Z0-9(!)-.?[]_`~;:!\#\$ù-%^&*+=]+$#",$mdp)===true) {
-            echo '<div class="erreur"> L\'email contient des caractères non autorisé </div>';
+        //elseif (!preg_match("#^[a-zA-Z0-9(!)-.?_`~;:ù-&*+=^%\#\$[]]+$#",$mdp)) {
+            elseif (!preg_match("#^[a-zA-Z0-9()!-@.?_`~;:ù-]+$#",$mdp)) {
+            echo '<div class="erreur"> Le mdp contient des caractères non autorisé </div>';
         }
         else {
             return true;
