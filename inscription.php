@@ -28,15 +28,25 @@
     <br/>
     <?php
         if (prenom()==true && nom()==true && naissance()==true && email()==true && mdp()==true) {
-            $prenom = strip_tags($_POST['prenom']);
-            $nom = strip_tags($_POST['nom']);
-            $naissance = strip_tags($_POST['naissance']);
-            $email = strip_tags($_POST['email']);
-            $mdp = strip_tags($_POST['mdp']);
-            echo 'vous etes inscript';
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $nom = htmlspecialchars($_POST['nom']);
+            $naissance = htmlspecialchars($_POST['naissance']);
+            $email = htmlspecialchars($_POST['email']);
+            $mdp = htmlspecialchars($_POST['mdp']);
             $link = mysqli_connect("localhost","root","","temp") ;
-            $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
-            mysqli_query($link, $query);
+            
+            $querymail = "SELECT mail FROM utilisateurs WHERE mail='".$email."'";
+            $checkmail = mysqli_query($link, $querymail);
+                if (mysqli_num_rows($checkmail) != 0) {
+                    echo '<div class="erreur"> email déjà utilisé </div>';
+                }
+                else {
+                    $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
+                    mysqli_query($link, $query);
+                    echo 'vous etes inscript';
+                    header("location: connexion.php");
+                }
+
         }
     ?>
     <?php include_once('includes/header_authentication.php'); ?>

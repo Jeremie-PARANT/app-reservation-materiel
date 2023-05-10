@@ -113,8 +113,7 @@ function mdp (){
         elseif (strlen($mdp)>100) {
             echo '<div class="erreur"> Votre mdp est trop long </div>';
         }
-        //elseif (!preg_match("#^[a-zA-Z0-9(!)-.?_`~;:ù-&*+=^%\#\$[]]+$#",$mdp)) {
-            elseif (!preg_match("#^[a-zA-Z0-9()!-@.?_`~;:ù-]+$#",$mdp)) {
+            elseif (!preg_match("#^[a-zA-Z0-9()!-.?_`~;:ù&*+=^%\#\$[\]]+$#",$mdp)) {//
             echo '<div class="erreur"> Le mdp contient des caractères non autorisé </div>';
         }
         else {
