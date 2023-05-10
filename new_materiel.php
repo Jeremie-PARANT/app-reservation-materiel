@@ -102,6 +102,8 @@
                     $description = $_POST['description'] ;
                     $query = "INSERT INTO materiels (reference, nom, type, description) VALUES ('$reference', '$nom', '$type', '$description') ;" ;    
                     mysqli_query($link, $query) ;
+                    echo "Votre matériel a bien été ajouté";
+                     
                 }
             }
             else{
