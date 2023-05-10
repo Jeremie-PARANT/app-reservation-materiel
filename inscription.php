@@ -13,37 +13,43 @@
     <?php include_once('includes/header_authentication.php'); ?>
     <?php include_once('includes/fonction.php'); ?>
     <form action="inscription.php" method="post">
-        <div class="form_bloc">
-            <span class="form_txt">Prénom :</span>
-            <input type="text" name="prenom" required="required">
-            <?php prenom($_POST['prenom']); //vérifie erreur de prenom ?>
-            <span class="form_txt">Nom :</span>
-            <input type="text" name="nom" required="required">
-            <?php nom($_POST['nom']); //vérifie erreur de nom ?>
-            <span class="form_txt">Date de naissance :</span>
-            <input type="date" name="naissance" required="required">
-            <?php naissance($_POST['naissance']); //vérifie erreur de naissance ?>
-            <span class="form_txt">Email :</span>
-            <input type="text" name="mail" required="required">
-            <?php email($_POST['mail']); //vérifie erreur de email ?>
-            <span class="form_txt">Mot de passe :</span>
-            <input type="password" name="mdp" required="required">
-            <?php mdp($_POST['mdp']); //vérifie erreur de email ?>
-            <input type="submit">
-        </div>
+    <div class="form_bloc">
+        <div class="form_txt">Prénom :</div><input type="text" name="prenom">
+        <?php prenom(); // erreur de prenom ?>
+        <div class="form_txt">Nom :</div><input type="text" name="nom">
+        <?php nom(); // erreur de nom ?>
+        <div class="form_txt">Date de naissance :</div><input type="date" name="naissance">
+        <?php naissance(); // erreur de naissance ?>
+        <div class="form_txt">Email :</div><input type="text" name="email">
+        <?php email(); // erreur de email ?>
+        <div class="form_txt">Mot de passe :</div><input type="password" name="mdp">
+        <?php mdp(); // erreur de email ?>
+        <input type="submit">
+    </div>
     </form>
+    <br/>
     <?php
-    if (prenom() == true && nom() == true && naissance() == true && email() == true && mdp() == true) {
-        $prenom = $_POST['prenom'];
-        $nom = $_POST['nom'];
-        $naissance = $_POST['naissance'];
-        $email = $_POST['email'];
-        $mdp = $_POST['mdp'];
-        echo 'vous etes inscript';
-        $link = mysqli_connect("localhost", "root", "", "sae_203");
-        $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
-        mysqli_query($link, $query);
-    }
+        if (prenom()==true && nom()==true && naissance()==true && email()==true && mdp()==true) {
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $nom = htmlspecialchars($_POST['nom']);
+            $naissance = htmlspecialchars($_POST['naissance']);
+            $email = htmlspecialchars($_POST['email']);
+            $mdp = htmlspecialchars($_POST['mdp']);
+            $link = mysqli_connect("localhost","root","","temp") ;
+            
+            $querymail = "SELECT mail FROM utilisateurs WHERE mail='".$email."'";
+            $checkmail = mysqli_query($link, $querymail);
+                if (mysqli_num_rows($checkmail) != 0) {
+                    echo '<div class="erreur"> email déjà utilisé </div>';
+                }
+                else {
+                    $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
+                    mysqli_query($link, $query);
+                    echo 'vous etes inscript';
+                    header("location: connexion.php");
+                }
+
+        }
     ?>
 
 </body>
