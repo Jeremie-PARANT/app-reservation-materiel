@@ -13,8 +13,10 @@ include_once('includes/header_authentication.php');
 ?>
     <form action="connexion.php" method="post">
         <div class="form_block">
-       <div class="form_txt">Mail :</div>   <input type="text" name="mail">
-       <div class="form_txt">Mot de passe :</div>   <input type="text" name="mdp">
+       <div class="form_txt">Mail :</div>   
+       <input type="text" name="mail" required="required">
+       <div class="form_txt">Mot de passe :</div>   
+       <input type="text" name="mdp" required="required">
         </div>
         <input type="submit" value="Se connecter">
     </form>
@@ -32,7 +34,7 @@ session_start();
        $row = mysqli_fetch_assoc($result);
        if ($row && $row['mail'] == $mail && $row['mdp'] == $mdp) {
             $_SESSION['mail'] = $mail;
-            header("location: accueil");
+            header("location: new_materiel");
            
        } else {
            echo "Mail ou mot de passe incorrect";

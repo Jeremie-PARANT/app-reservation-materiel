@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="styles/inscription.css">
     <title>Document</title>
 </head>
+
 <body>
     <?php include_once('includes/header_authentication.php'); ?>
     <?php include_once('includes/fonction.php'); ?>
@@ -49,6 +51,7 @@
 
         }
     ?>
-    <?php include_once('includes/header_authentication.php'); ?>
+
 </body>
+
 </html>
