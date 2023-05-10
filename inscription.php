@@ -35,15 +35,19 @@
             $naissance = htmlspecialchars($_POST['naissance']);
             $email = htmlspecialchars($_POST['email']);
             $mdp = htmlspecialchars($_POST['mdp']);
-            $link = mysqli_connect("localhost","root","","temp") ;
+            
+            $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
+            
+            $link = mysqli_connect("localhost","root","","sae_203") ;
             
             $querymail = "SELECT mail FROM utilisateurs WHERE mail='".$email."'";
             $checkmail = mysqli_query($link, $querymail);
-                if (mysqli_num_rows($checkmail) != 0) {
+                
+            if (mysqli_num_rows($checkmail) != 0) {
                     echo '<div class="erreur"> email déjà utilisé </div>';
                 }
                 else {
-                    $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
+                    $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$hashedPassword', '$email')";
                     mysqli_query($link, $query);
                     echo 'vous etes inscript';
                     header("location: connexion.php");
