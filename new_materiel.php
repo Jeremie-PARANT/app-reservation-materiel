@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/new_materiel2.css">
-    <link rel="icon" href="ressource/fried_corp.png" type="image/icon type">
+    <link rel="stylesheet" href="styles/new_materiel2.css">
     <title>Ajouter du matériel</title>
 </head>
 <body>
@@ -14,7 +13,7 @@
             </div>
             <div id="nav">
                 <div class="menu">
-                    <a class="bouton_menu" href="materiel.html">Matériel</a>
+                    <a class="bouton_menu" href="materiel.php">Matériel</a>
                 </div>
                 <div class="menu">
                     <a class="bouton_menu" href="demande.html">Mes demandes</a>
@@ -22,20 +21,23 @@
                 <?php
                 session_start();
 
-                $link = mysqli_connect("localhost", "root", "", "bdd_sae");
-
-                $email = $_SESSION['email'];
-
-                $query = "SELECT admin FROM users WHERE email='$email' ;";
+                $link = mysqli_connect("localhost", "root", "", "sae_203");
+                $mail = $_SESSION['mail'];
+                $query = "SELECT autorisation FROM utilisateurs WHERE mail='$mail';";
                 $result = mysqli_query($link, $query);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    if ($row['admin'] == '1') {
-                        echo "<div class='menu'>";
-                        echo "<a class='bouton_menu' href='validation.html'>Validation</a>";
-                        echo "</div>";
-                        echo "<div class='menu'>";
-                        echo "<a class='bouton_menu' href='new_materiel.php'>Ajout de Matériel</a>";
-                        echo "</div>";
+                if ($result === false) {
+                    // Gérer l'erreur ici, par exemple afficher un message d'erreur à l'utilisateur
+                    echo "Erreur lors de l'exécution de la requête : " . mysqli_error($link);
+                } else {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        if ($row['autorisation'] == '1') {
+                            echo "<div class='menu'>";
+                            echo "<a class='bouton_menu' href='validation.html'>Validation</a>";
+                            echo "</div>";
+                            echo "<div class='menu'>";
+                            echo "<a class='bouton_menu' href='new_materiel.php'>Ajout de Matériel</a>";
+                            echo "</div>";
+                        }
                     }
                 }
                 ?>
@@ -65,6 +67,7 @@
                         <option value="camera">Caméra</option>
                         <option value="micro">micro</option>
                         <option value="light">light</option>
+                        <option value="Trépied">Trépied</option>
                     </select>
                     <br>
                     <br>
@@ -86,23 +89,23 @@
     </div>
     <?php
     
-        $email = $_SESSION['email'];
+        $mail = $_SESSION['mail'];
         
-        $query = "SELECT admin FROM users WHERE email='$email' ;" ;
+        $query = "SELECT autorisation FROM utilisateurs WHERE mail='$mail' ;" ;
         $result = mysqli_query($link, $query) ;
         while ($row = mysqli_fetch_assoc($result)) {
-            if ($row['admin'] == '1') {
+            if ($row['autorisation'] == '1') {
                 if (!empty($_POST['nom']) && !empty($_POST['reference']) && !empty($_POST['type']) && !empty($_POST['description'])) {
                     $nom = $_POST['nom'] ;
                     $reference = $_POST['reference'] ;
                     $type = $_POST['type'] ;
                     $description = $_POST['description'] ;
-                    $query = "INSERT INTO materiel (reference, nom, type, description) VALUES ('$reference', '$nom', '$type', '$description') ;" ;    
+                    $query = "INSERT INTO materiels (reference, nom, type, description) VALUES ('$reference', '$nom', '$type', '$description') ;" ;    
                     mysqli_query($link, $query) ;
                 }
             }
             else{
-                header("Location: accueil.php");
+                header("Location: materiel.php");
             }
         }
 
