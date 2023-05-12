@@ -32,10 +32,10 @@ session_start();
        $mdp = $_POST['mdp'];
        $result = mysqli_query($link, "SELECT mail, mdp FROM utilisateurs WHERE mail='$mail'");
        $row = mysqli_fetch_assoc($result);
-       if ($row && $row['mail'] == $mail && $row['mdp'] == $mdp) {
+       if ($row && password_verify($mdp, $row['mdp'])) {
             $_SESSION['mail'] = $mail;
             header("location: new_materiel");
-           
+           exit();
        } else {
            echo "Mail ou mot de passe incorrect";
        }
