@@ -34,7 +34,7 @@ session_start();
        $row = mysqli_fetch_assoc($result);
        if ($row && $row['mail'] == $mail && $row['mdp'] == $mdp) {
             $_SESSION['mail'] = $mail;
-            header("location: new_materiel");
+            header("location: materiel.php");
            
        } else {
            echo "Mail ou mot de passe incorrect";
