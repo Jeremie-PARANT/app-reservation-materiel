@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,37 +8,50 @@
     <link rel="stylesheet" href="styles/inscription.css">
     <title>Document</title>
 </head>
+
 <body>
     <?php include_once('includes/header_authentication.php'); ?>
+    <?php include_once('includes/fonction.php'); ?>
     <form action="inscription.php" method="post">
     <div class="form_bloc">
         <div class="form_txt">Prénom :</div><input type="text" name="prenom">
-        <?php
-        if (empty($_POST['prenom'])) {
-        echo "vide";
-        }
-        else if (!empty($_POST['prenom'])) {
-        $prenom = $_POST['prenom'];
-        }
-        ?>
+        <?php prenom(); // erreur de prenom ?>
         <div class="form_txt">Nom :</div><input type="text" name="nom">
-        <div class="form_txt">Date de naissance :</div><input type="text" name="naissance">
+        <?php nom(); // erreur de nom ?>
+        <div class="form_txt">Date de naissance :</div><input type="date" name="naissance">
+        <?php naissance(); // erreur de naissance ?>
         <div class="form_txt">Email :</div><input type="text" name="email">
-        <div class="form_txt">Mot de passe :</div><input type="text" name="mdp">
-        </div><input type="submit">
+        <?php email(); // erreur de email ?>
+        <div class="form_txt">Mot de passe :</div><input type="password" name="mdp">
+        <?php mdp(); // erreur de email ?>
+        <input type="submit">
     </div>
     </form>
+    <br/>
     <?php
-    /*
-    if (!empty($_POST['prenom']) && !empty($_POST['nom']) && !empty($_POST['naissance']) && !empty($_POST['email']) && !empty($_POST['mdp'])) {
-        $prenom = $_POST['prenom'] ;
-        $nom = $_POST['nom'] ;
-        $naissance = $_POST['naissance'] ;
-        $email = $_POST['email'] ;
-        $mdp = $_POST['mdp'] ;
-        echo "vide";
-    }
-    */
+        if (prenom()==true && nom()==true && naissance()==true && email()==true && mdp()==true) {
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $nom = htmlspecialchars($_POST['nom']);
+            $naissance = htmlspecialchars($_POST['naissance']);
+            $email = htmlspecialchars($_POST['email']);
+            $mdp = htmlspecialchars($_POST['mdp']);
+            $link = mysqli_connect("localhost","root","","temp") ;
+            
+            $querymail = "SELECT mail FROM utilisateurs WHERE mail='".$email."'";
+            $checkmail = mysqli_query($link, $querymail);
+                if (mysqli_num_rows($checkmail) != 0) {
+                    echo '<div class="erreur"> email déjà utilisé </div>';
+                }
+                else {
+                    $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$mdp', '$email')";
+                    mysqli_query($link, $query);
+                    echo 'vous etes inscript';
+                    header("location: connexion.php");
+                }
+
+        }
     ?>
+
 </body>
+
 </html>
