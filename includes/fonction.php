@@ -5,27 +5,30 @@
     }
 </style>
 <?php
-// inscription eurreur
+// inscription erreur
 function prenom (){
     if (empty($_POST['prenom'])) {
-
     }
         else if (!empty($_POST['prenom'])) {
-        $prenom = strip_tags($_POST['prenom']);
+        $prenom = ($_POST['prenom']);
             if (strlen($prenom)<3) {
-                echo '<div class="erreur"> Votre prenom est trop court </div>';
+                $erreur_prenom =  '<div class="erreur"> Votre prenom est trop court </div>';
+                return $erreur_prenom;
             }
             elseif (strlen($prenom)>50) {
-                echo '<div class="erreur"> Votre prenom est trop long </div>';
+                $erreur_prenom =  '<div class="erreur"> Votre prenom est trop long </div>';
+                return $erreur_prenom;
             }
             elseif (!preg_match("#^[A-Z]+$#", $prenom[0])) {
-                echo '<div class="erreur"> La 1er lettre de votre prenom doit comporter une majuscule </div>';
+                $erreur_prenom =  '<div class="erreur"> La 1er lettre de votre prenom doit comporter une majuscule </div>';
+                return $erreur_prenom;
             }
             elseif (!preg_match("#^[a-zA-Z0-9'-.àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÕÃÑäëïöüÿÄËÏÖÜŸç]+$#", $prenom)) {
-                echo '<div class="erreur"> Votre prenom contient des charactères non autorisé </div>';
+                $erreur_prenom = '<div class="erreur"> Votre prenom contient des charactères non autorisé </div>';
+                return $erreur_prenom;
              }
             else {
-                return true;
+                return false;
             }
     }
 }
@@ -35,22 +38,33 @@ function nom (){
 
     }
         else if (!empty($_POST['nom'])) {
-        $nom = strip_tags($_POST['nom']);
+        $nom = ($_POST['nom']);
         if (strlen($nom)<3) {
-            echo '<div class="erreur"> Votre nom est trop court </div>';
+            $erreur_nom =  '<div class="erreur"> Votre nom est trop court </div>';
+            return $erreur_nom;
         }
         elseif (strlen($nom)>50) {
-            echo '<div class="erreur"> Votre nom est trop long </div>';
+            $erreur_nom =  '<div class="erreur"> Votre nom est trop long </div>';
+            return $erreur_nom;
         }
         elseif (!preg_match("#^[A-Z]+$#", $nom[0])) {
-            echo '<div class="erreur"> La 1er lettre de votre pnom doit comporter une majuscule </div>';
+            $erreur_nom =  '<div class="erreur"> La 1er lettre de votre pnom doit comporter une majuscule </div>';
+            return $erreur_nom;
         }
         elseif (!preg_match("#^[a-zA-Z0-9'-.àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÕÃÑäëïöüÿÄËÏÖÜŸç]+$#", $nom)) {
-            echo '<div class="erreur"> Votre nom contient des charactères non autorisé </div>';
+            $erreur_nom =  '<div class="erreur"> Votre nom contient des charactères non autorisé </div>';
+            return $erreur_nom;
          }
         else {
-            return true;
+            return false;
         }
+    }
+}
+
+function validateDate($naissance, $format) //utiliser dans function naissance
+{
+    if (DateTime::createFromFormat($format, $naissance)==true){
+        return true;
     }
 }
 
@@ -60,19 +74,24 @@ function naissance (){
 
     }
         else if (!empty($_POST['naissance'])) {
-        $naissance = strip_tags($_POST['naissance']);
+        $naissance = ($_POST['naissance']);
         $today = date("Y-m-d H:i:s");
-        if(!checkdate($naissance[0-4], $naissance[5-6], $naissance[7-8])==true){
-            echo '<div class="erreur"> pas une date ou voyage dans le temps </div>';
+        $format = 'Y-m-d';
+        $validate_date = DateTime::createFromFormat($format, $naissance);
+        if((validateDate($naissance, $format))!=true){
+            $erreur_date = '<div class="erreur"> pas une date </div>';
+            return $erreur_date;
         }
         elseif ($naissance > $today) {
-            echo '<div class="erreur"> Vous venez du futur </div>';
+            $erreur_date = '<div class="erreur"> Vous venez du futur </div>';
+            return $erreur_date;
         }
         elseif ($naissance < $vieux) {
-            echo '<div class="erreur"> Etes-vous vraiment encore vivant </div>';
+            $erreur_date = '<div class="erreur"> Etes-vous vraiment encore vivant ? </div>';
+            return $erreur_date;
         }
         else {
-            return true;
+            return false;
         }
     }
 }
@@ -82,21 +101,21 @@ function email (){
 
     }
         else if (!empty($_POST['email'])) {
-        $email = strip_tags($_POST['email']);
+        $email = ($_POST['email']);
         if (strlen($email)<3) {
-            echo '<div class="erreur"> Votre email est trop court </div>';
+            $erreur_email = '<div class="erreur"> Votre email est trop court </div>';
+            return $erreur_email;
         }
         elseif (strlen($email)>100) {
-            echo '<div class="erreur"> Votre email est trop long </div>';
+            $erreur_email = '<div class="erreur"> Votre email est trop long </div>';
+            return $erreur_email;
         }
-        elseif (!preg_match('#@#',$email)) {
-            echo '<div class="erreur"> L\'email ne contient pas @ </div>';
-        }
-        elseif (!preg_match("#^[a-zA-Z0-9@!%&'*+-/=?^_`{|}~.\$\#]+$#",$email)) {
-            echo '<div class="erreur"> L\'email contient des caractères non autorisé </div>';
+        elseif (filter_var($email, FILTER_VALIDATE_EMAIL)==false) {
+            $erreur_email = '<div class="erreur"> Email non valide </div>';
+            return $erreur_email;
         }
         else {
-            return true;
+            return false;
         }
     }
 }
@@ -106,19 +125,26 @@ function mdp (){
 
     }
         else if (!empty($_POST['mdp'])) {
-        $mdp = strip_tags($_POST['mdp']);
+        $mdp = ($_POST['mdp']);
         if (strlen($mdp)<8) {
-            echo '<div class="erreur"> Votre mdp est trop court </div>';
+            $erreur_mdp = '<div class="erreur"> Votre mdp est trop court </div>';
+            return $erreur_mdp;
         }
         elseif (strlen($mdp)>100) {
-            echo '<div class="erreur"> Votre mdp est trop long </div>';
+            $erreur_mdp = '<div class="erreur"> Votre mdp est trop long </div>';
+            return $erreur_mdp;
         }
             elseif (!preg_match("#^[a-zA-Z0-9()!-.?_`~;:ù&*+=^%\#\$[\]]+$#",$mdp)) {//
-            echo '<div class="erreur"> Le mdp contient des caractères non autorisé </div>';
+            $erreur_mdp = '<div class="erreur"> Le mdp contient des caractères non autorisé </div>';
+            return $erreur_mdp;
         }
-        else {
-            return true;
+        elseif (!preg_match('#[A-Z]#', $mdp) || !preg_match('#[a-z]#', $mdp) || !preg_match('#[0-9]#', $mdp)){
+            $erreur_mdp = '<div class="erreur"> Au moins 1 minuscule, 1 majuscule, 1 chiffre nécessaire </div>';
+            return $erreur_mdp;
         }
+    }
+    else {
+        return false;
     }
 }
 ?>
