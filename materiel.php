@@ -9,6 +9,8 @@
     <title>Materiel</title>
 </head>
 <body><?php
+
+ 
     if (empty($_SESSION['mail'])){ //vérifie si connecté
         echo 'vous devez vous connecté';
     }
@@ -41,7 +43,7 @@
 
         }
     }
-/* Code pour affichage de la page celon l'autorisation
+/* Code pour affichage de la page selon l'autorisation
     if (empty($_SESSION['mail'])){ //vérifie si connecté
         echo 'vous devez vous connecté';
     }
