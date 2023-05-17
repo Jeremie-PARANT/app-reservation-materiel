@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/new_materiel2.css">
     <title>Ajouter du matériel</title>
+    <?php
+        include_once('includes/fonction_mat.php');
+    ?>
 </head>
 <body>
 <header>
@@ -91,6 +94,12 @@
                     <!--Inserer le Nom du matériel-->
                     <p>Nom : </p>
                     <input class="champs_info" type="text" name="nom" required="required">
+                    <?php 
+                    $erreur_nom=noms(); // erreur de noms 
+                    if ($erreur_nom!=false){
+                    echo $erreur_nom;
+                    }   
+                    ?>
                     <br>
                     <br>
 
@@ -106,6 +115,7 @@
                         <option value="light">light</option>
                         <option value="Trépied">Trépied</option>
                     </select>
+        
                     <br>
                     <br>
 
@@ -114,16 +124,30 @@
                     <!--Inserer la Réference du matériel (que des chiffres)-->
                     <p>Référence : </p>
                     <input class="champs_info" type="text" name="reference" required="required">
-                </div>
+                    
+                    <?php
+                    $erreur_reference=reference(); // erreur de noms 
+                    if ($erreur_reference!=false){
+                    echo $erreur_reference;
+                    }
+                    ?>
+               
+            </div>
+
+
+
+                <!--Ajouter une description au matériel-->
                 <div id="description">
-
-
-
-
-                    <!--Ajouter une description au matériel-->
+    
                     <p>Description : </p>
                     <textarea id="champs" type="text" name="description" size="10" required="required"></textarea>
-                </div>
+                <?php
+                $erreur_description=description(); // erreur de noms 
+                if ($erreur_description!=false){
+                echo $erreur_description;
+                }
+                ?>
+                </div> 
             </div>
             <br>
             <br>
@@ -143,7 +167,9 @@
 
                 <!--Code qui permet d'ajouter le matériel-->
     <?php
-    
+
+
+
         $mail = $_SESSION['mail'];
         
 
@@ -152,61 +178,57 @@
 
 
 
-        //définir la réference
-        if (!empty($_POST['reference'])){
-            $reference = ($_POST['reference']);
+// Vérifier si la référence n'est pas vide
+if (!empty($_POST['reference'])) {
+    $reference = $_POST['reference'];
 
+    // Vérifier les autorisations et les références
+    $query = "SELECT autorisation FROM utilisateurs WHERE mail='$mail';";
+    $queryref = "SELECT reference FROM materiels WHERE reference='$reference';";
+    $checkref = mysqli_query($link, $queryref);
 
-            //vérif des autorisations et references
-        $query = "SELECT autorisation FROM utilisateurs WHERE mail='$mail' ;" ;
-        $queryref = "SELECT reference FROM materiels WHERE reference='".$reference."'";
-        $checkref = mysqli_query($link, $queryref);
-
-
-
-            //Message si Réference déjà utilisé
-         if (mysqli_num_rows($checkref) != 0) {
-                    echo '<div class="erreur"> Reference déja transmise </div>';
-         }
-
-
-         //message si le type est faux
-        elseif (!empty($_POST['type'])) {
-            if (!in_array($_POST['type'], ALLOWED_TYPES)) {
-                echo "type faux";
-            }
+    // Afficher un message si la référence est déjà utilisée
+    if (mysqli_num_rows($checkref) != 0) {
+        echo '<div class="erreur">Référence déjà utilisée</div>';
+    }
+    // Afficher un message si le type est incorrect
+    elseif (!empty($_POST['type'])) {
+        if (!in_array($_POST['type'], ALLOWED_TYPES)) {
+            echo "Type incorrect";
         }
 
+            // Envoyer les informations à la base de données 
+    else {
+    $result = mysqli_query($link, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Vérifier les autorisations
+        if ($row['autorisation'] == '1') {
+            if (noms() == false && reference() == false && description() == false) {
+                if (!empty($_POST['nom']) || !empty($_POST['reference']) || !empty($_POST['description'])) {
+                    // Éviter les injections de code dans la base de données en utilisant mysqli_real_escape_string
+                    $nom = mysqli_real_escape_string($link, $_POST['nom']);
+                    $reference = mysqli_real_escape_string($link, $_POST['reference']);
+                    $type = mysqli_real_escape_string($link, $_POST['type']);
+                    $description = mysqli_real_escape_string($link, $_POST['description']);
 
-        //Envoi des infos à la BDD
-        else{
-        $result = mysqli_query($link, $query) ;
-        while ($row = mysqli_fetch_assoc($result)) {
+                    // Insérer le matériel dans la base de données
+                    $query = "INSERT INTO materiels (reference, nom, type, description) VALUES ('$reference', '$nom', '$type', '$description');";
+                    mysqli_query($link, $query);
 
-            //Vérif des autorisations
-            if ($row['autorisation'] == '1') {
-                if (!empty($_POST['nom']) && !empty($_POST['reference']) && !empty($_POST['type']) && !empty($_POST['description'])) {
-
-                    //msqli_real_escape_strings évite injections de code pour la BDD
-                    $nom =  mysqli_real_escape_string($link, $_POST['nom']) ;
-                    $reference = mysqli_real_escape_string($link, $_POST['reference']) ;
-                    $type = mysqli_real_escape_string($link, $_POST['type']) ;
-                    $description = mysqli_real_escape_string($link, $_POST['description']) ;
-
-                    //Insertion du matériel
-                    $query = "INSERT INTO materiels (reference, nom, type, description) VALUES ('$reference', '$nom', '$type', '$description') ;" ;    
-                    mysqli_query($link, $query) ;
-
-                    //Message d'ajout
+                    // Afficher un message d'ajout
                     echo "Votre matériel a bien été ajouté";
-                       
                 }
             }
         }
-        }
     }
+}
+}   
+}
 
-        mysqli_close($link);
+
+
+mysqli_close($link);
+
     ?>
 </body>
 </html>
