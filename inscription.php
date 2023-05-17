@@ -58,7 +58,7 @@
                 else {
                     $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$hashedPassword', '$email')";
                     mysqli_query($link, $query);
-                    echo 'vous etes inscript';
+                    echo 'vous etes inscrits';
                     header("location: connexion.php");
                 }
             }

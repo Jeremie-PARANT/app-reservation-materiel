@@ -43,6 +43,7 @@
 
         include_once('includes/footer.php');
         }
+
 /* Code pour affichage de la page celon l'autorisation
     if (empty($_SESSION['mail'])){ //vérifie si connecté
         echo 'vous devez vous connecté';

@@ -4,23 +4,32 @@ header {
     display: flex;
     justify-content: center;
     height: 50px;
-    background-color: grey;
+    background-color: #09A491;
+}
+img {
+    padding-left: 1300px;
+    padding-top: 10px;
+    width : 30px;
+    height : 30px;
+
 }
 .connexion {
-    padding-right: 50px;
-    padding-left: 50px;
-    color: black;
+    
+    padding-top: 10px;
+    padding-left: 10px;
+    color: white;
+    font-size: 25px;
+    font-weight: 700;
 }
-.connexion {
-    padding-right: 50px;
-    padding-left: 50px;
-}
+
 a {
     text-decoration: None;
 }
+
 </style>
 
 <header>
-    <a href="connexion.php"><div class=connexion>connexion</div></a>
-    <a href="inscription.php"><div class=inscription>inscription</div></a>
+    <a href="connexion.php"><img src="images/avatar.png" /></a>
+    <a href="connexion.php"><div class="connexion">Connexion</div></a>
+    
 </header>
