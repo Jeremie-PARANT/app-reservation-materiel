@@ -52,22 +52,16 @@ else{
                     //envoie à la BDD
                     if (!empty($_POST['nom'])){     //envoie nom
                         $nouv_nom = mysqli_real_escape_string($link, $_POST['nom']);
-                        echo $nouv_nom;
-                        echo $reference;
                         $result_modif_nom = mysqli_query($link, "UPDATE materiels SET nom = '$nouv_nom' WHERE reference ='$reference'");
                         header("location: $url");
                     }
                     if (!empty($_POST['type'])){     //envoie type
                         $nouv_type = mysqli_real_escape_string($link, $_POST['type']);
-                        echo $nouv_type;
-                        echo $reference;
                         $result_modif_type = mysqli_query($link, "UPDATE materiels SET type = '$nouv_type' WHERE reference ='$reference'");
                         header("location: $url");
                     }
                     if (!empty($_POST['description'])){     //envoie description
                         $nouv_description = mysqli_real_escape_string($link, $_POST['description']);
-                        echo $nouv_description;
-                        echo $reference;
                         $result_modif_description = mysqli_query($link, "UPDATE materiels SET description = '$nouv_description' WHERE reference ='$reference'");
                         header("location: $url");
                     }
