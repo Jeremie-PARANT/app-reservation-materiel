@@ -1,0 +1,121 @@
+
+.inscription { 
+    padding-top: 30px;
+    padding-left: 330px;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+.form_bloc {
+    border-width:7px;
+    border-style: inset;
+    border-color:black;
+    border-radius: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+    }
+#prenom {
+    justify-content:space-between;
+    margin-bottom: 20px;
+}
+
+#p {
+    width: 300px;
+}
+#n {
+    width: 310px;
+}
+
+#d {
+    width: 120px;
+}
+
+#e {
+    width: 400px;
+}
+
+#m {
+    width: 663px;
+}
+
+#date {
+    justify-content:space-between;
+    margin-bottom: 20px;
+}
+
+#mdp {
+    justify-content:space-between;
+    margin-bottom: 20px;
+}
+
+.bouton {
+    color :white;
+    background-color:#2E3494;
+    border-style: none;
+    border-radius: 30px;
+    padding:7px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-left: 350px;
+}
+.form_prenom{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 20px;
+    margin-top: 3px;
+    background-color: rgb(65, 65, 65);
+    border-radius: 10px;
+}
+
+
+.form_nom{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 400px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: rgb(65, 65, 65);
+    border-radius: 10px;
+}
+
+.form_date {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: rgb(65, 65, 65);
+    border-radius: 10px;
+}
+
+.form_email {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: rgb(65, 65, 65);
+    border-radius: 10px;
+}
+
+.form_mdp {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 5px;
+    margin-right: 400px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: rgb(65, 65, 65);
+    border-radius: 10px;
+
+}
+

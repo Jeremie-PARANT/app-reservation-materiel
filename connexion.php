@@ -13,7 +13,7 @@ include_once('includes/header_authentication.php');
 ?>
     <form action="connexion.php" method="post">
         <div class="form_block">
-       <div class="form_txt">Mail :</div>   
+       <div class="form_txt">Email :</div>   
        <input type="text" name="mail" required="required">
        <div class="form_txt">Mot de passe :</div>   
        <input type="text" name="mdp" required="required">
@@ -43,6 +43,7 @@ session_start();
    
    
     ?>
+    <?php include_once('includes/footer.php'); ?>
 
 </body>
 </html>

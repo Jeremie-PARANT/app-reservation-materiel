@@ -20,5 +20,5 @@ a {
 
 </style>
 <footer>
-    <img src="SAE_203/images/logoIUT.jpg" class="img2"/>
+    <img src="images/logoIUT.jpg" class="img2"/>
 </footer>
