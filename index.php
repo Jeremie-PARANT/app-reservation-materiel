@@ -11,7 +11,7 @@
 <?php 
 include_once('includes/header_authentication.php'); 
 ?>
-    <form action="connexion.php" method="post">
+    <form action="index.php" method="post">
         <div class="form_block">
        <div class="form_txt">Email :</div>   
        <input type="text" name="mail" required="required">
