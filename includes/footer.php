@@ -1,6 +1,6 @@
 <style>
 footer {
-    position: absolute ;
+    position:  ;
     bottom: 0;
     display: flex;
     justify-content: center;
