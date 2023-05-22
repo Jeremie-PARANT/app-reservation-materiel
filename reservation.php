@@ -12,12 +12,18 @@
 if (empty($_SESSION['mail'])){ //vérifie si connecté
     include_once('includes/redirection_connexion.php');
 }
+
+
+
+
 //   ---   PAGE DE RESERVATION   ---   //
 else { //FORMULAIRE
     include_once('includes/variable.php');
     include_once('includes/fonction.php');
     include_once('includes/header.php');
+   
     
+
     //Select reférence forms
     echo '<h1>Faire une réservation :</h1>
     <form action="'.$url.'" method=\'post\'>
@@ -30,6 +36,8 @@ else { //FORMULAIRE
         echo '<option value="'.$reference.'">'.$nom.' : '.$reference.'</option>';
     }
 
+
+
     //DATE
     //Date debut 
     echo '</select>
@@ -38,6 +46,8 @@ else { //FORMULAIRE
     if ($erreur_date_debut!=false){
         echo $erreur_date_debut;
     }
+
+
     //Date fin
     echo '<div class="form_txt">Date de fin : </div><input type="date" name="date_fin" required="required">';
     $erreur_date_fin=date_fin(); // erreur de date_fin 
@@ -52,12 +62,17 @@ else { //FORMULAIRE
     }
 
 
+
     //   ---   ENVOIE VERS BDD   ---   //
+
+
     //Verifie erreur date
     if  (date_debut()==false && date_fin()==false && !empty($_POST['nom'])){
         $materiel_ref = mysqli_real_escape_string($link, $_POST['nom']);
         $user = mysqli_real_escape_string($link, $_SESSION['mail']);
         
+
+
         //Verifie si matériel existe
         $query_materiel_exist = "SELECT reference FROM materiels WHERE reference='".$materiel_ref."'";
         $checkmateriel = mysqli_query($link, $query_materiel_exist);
@@ -68,6 +83,8 @@ else { //FORMULAIRE
         elseif (!empty($row__check_reservation['reference'])) {
             echo 'déjà reserver';
         }
+
+
         //Envoie vers BDD
         elseif (reservation_collide()==false){
             $date_debut = mysqli_real_escape_string($link, $_POST['date_debut']);

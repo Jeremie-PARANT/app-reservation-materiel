@@ -19,7 +19,10 @@ include_once('includes/header_authentication.php');
        <input type="password" name="mdp" required="required">
         </div>
         <input type="submit" value="Se connecter">
+        
     </form>
+
+    <a href="inscription.php"> <input id="b_inscription" type="submit" value="S'inscrire"> </a>
 
     <?php
    
