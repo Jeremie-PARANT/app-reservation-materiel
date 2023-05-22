@@ -18,10 +18,13 @@ include_once('includes/header_authentication.php');
        <div class="form_txt">Email :</div>   
        <input type="text" name="mail" required="required">
        <div class="form_txt">Mot de passe :</div>   
-       <input type="text" name="mdp" required="required">
+       <input type="password" name="mdp" required="required">
         </div>
         <input type="submit" value="Se connecter">
+        
     </form>
+
+    <a href="inscription.php"> <input id="b_inscription" type="submit" value="S'inscrire"> </a>
 
     <?php
    
@@ -32,18 +35,23 @@ session_start();
    if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
        $mail = $_POST['mail'];
        $mdp = $_POST['mdp'];
-       $result = mysqli_query($link, "SELECT mail, mdp FROM utilisateurs WHERE mail='$mail'");
+       $result = mysqli_query($link, "SELECT mail, mdp, autorisation FROM utilisateurs WHERE mail='$mail'");
        $row = mysqli_fetch_assoc($result);
-       if ($row && $row['mail'] == $mail && $row['mdp'] == $mdp) {
+       if ($row && password_verify($mdp, $row['mdp'])) {
             $_SESSION['mail'] = $mail;
-            header("location: materiel.php");
-           
+            $_SESSION['autorisation'] = $row['autorisation'];
+            if ($row['autorisation'] == '1') {
+                header('Location: new_materiel.php');
+            }
+            else{
+                header("Location: materiel.php");
+            }
+           exit();
        } else {
            echo "Mail ou mot de passe incorrect";
        }
+    
    }
-   
-   
     ?>
     <?php include_once('includes/footer.php'); ?>
 

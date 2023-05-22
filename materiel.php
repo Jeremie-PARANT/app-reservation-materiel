@@ -9,38 +9,41 @@
     <title>Materiel</title>
 </head>
 <body><?php
-    if (empty($_SESSION['mail'])){ //vérifie si connecté
-        echo 'vous devez vous connecté';
+    if (empty($_SESSION['mail'])){ //Vérifie connection
+        include_once('includes/redirection_connexion.php');
     }
-    else { //(changer quand autorisation ok)
-        $mail = $_SESSION['mail'];
-        $link = mysqli_connect("localhost", "root", "", "sae_203");
-        $result1 = mysqli_query($link, "SELECT autorisation FROM utilisateurs WHERE mail='$mail'");
-        $row1 = mysqli_fetch_array($result1);
-        $autorisation = $row1['autorisation'];
-        
-        if ($autorisation==false) { //page utilisateur
-            include_once('includes/header.php');
-            $result = mysqli_query($link, "SELECT * FROM materiels");
+    else {
+        include_once('includes/variable.php');
+        include_once('includes/fonction.php');
+        include_once('includes/header.php');
 
-            echo " <table border=1>" ; //table
-            while ($row = mysqli_fetch_assoc($result)) {
-                $nom = htmlspecialchars($row['nom']);
-                $type = htmlspecialchars($row['type']);
-                $reference = htmlspecialchars($row['reference']);
-                echo "<tr> <td>" . 'image' . "</td><td>". $nom ."</br>". $type ."</br>". $reference ."</br>".
-                "<a href=\"connexion.php\"><div>details</div></a>" . "</TD> </tr>" ; //ajouté la bonne page quand il faudra
-                }
-            echo " </table> " ;
+        //BARRE DE RECHERCHE
+        echo '<form action="materiel.php" method="post">
+        <div class="form_txt">Recherche :</div><input type="text" name="nom_materiel">
+        </form>';
+        if (!empty($_POST['nom_materiel'])){
+            $nom_materiel = mysqli_real_escape_string($link, $_POST['nom_materiel']);
+        }
+        else {
+            $nom_materiel = '';
+        }
+            //   ---   TABLEAU   ---   //
+        $result_m = mysqli_query($link, "SELECT * FROM materiels WHERE nom LIKE '$nom_materiel%'");
+        echo "<table border=1>" ;
+        while ($row_m = mysqli_fetch_assoc($result_m)) {
+            $nom = htmlspecialchars($row_m['nom']);
+            $type = htmlspecialchars($row_m['type']);
+            $reference = htmlspecialchars($row_m['reference']);
+            $description = htmlspecialchars($row_m['description']);
+            $description = decription100 ($description);
+            echo "<tr> <td>" . image($type) . "</td><td>". $nom ."</br>". $type ."</br>". $reference ."</br>". $description ."</br>".
+            "<a href=\"details.php?reference=". $reference ."\"><div id=\"details\">details</div></a>" . "</TD>" ;
+            }
+        echo " </tr> </table> " ;
 
-            include_once('includes/footer.php');
+        include_once('includes/footer.php');
         }
 
-        else { //page admin
-            echo 'admin';
-
-        }
-    }
 /* Code pour affichage de la page celon l'autorisation
     if (empty($_SESSION['mail'])){ //vérifie si connecté
         echo 'vous devez vous connecté';
