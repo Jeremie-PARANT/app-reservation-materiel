@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/tableau.css">
     <title>Details</title>
 </head>
 <body><?php
@@ -33,7 +34,8 @@ else{
                 $description = htmlspecialchars($row_current_material['description']);
                 
                 //Tableau
-                echo '<table border=1>';
+                echo '<div class="reserve">Réservation en attente</div>
+                <table>';
                 echo '<tr> <td>' . image($type) . '</td><td>'. $nom .'</br>'. $type .'</br>'. $reference .'</br>'. $description .'</br>';
                 echo ' </tr> </table> ' ;
 
