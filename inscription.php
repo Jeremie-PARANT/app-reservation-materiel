@@ -11,31 +11,77 @@
 
 <body>
     <?php include_once('includes/header_authentication.php'); ?>
+
+
+    <div class="inscription">Inscription</div>
+
+
     <?php include_once('includes/fonction.php'); ?>
+
+
+
     <form action="inscription.php" method="post">
+
     <div class="form_bloc">
-        <div class="form_txt">Prénom :</div><input type="text" name="prenom" required="required">
+
+        <div id=prenom>
+
+        <span class="form_prenom">Prénom :
+        <input id=p type="text" name="prenom" required="required">
+        </span>
+
         <?php $erreur_prenom=prenom(); // erreur de prenom
         if ($erreur_prenom!=false){
             echo $erreur_prenom;}?>
-        <div class="form_txt">Nom :</div><input type="text" name="nom" required="required">
+
+
+        <span class="form_nom">Nom :
+        <input id=n type="text" name="nom" required="required">
+        </span>
+
+
         <?php $erreur_nom=nom(); // erreur de nom 
         if ($erreur_nom!=false){
             echo $erreur_nom;}?>
-        <div class="form_txt">Date de naissance :</div><input type="date" name="naissance" required="required">
+
+        </div>
+
+        <div id= date>
+
+        <span class="form_date">Date de naissance :
+        <input id=d type="date" name="naissance" required="required">
+        </span>
+
         <?php $erreur_naissance=naissance(); // erreur de naissance 
         if ($erreur_naissance!=false){
             echo $erreur_naissance;}?>
-        <div class="form_txt">Email :</div><input type="text" name="email" required="required">
-        <?php $erreur_email=email(); // erreur de email 
+        
+        <span class="form_email">Email :
+        <input id=e type="text" name="email" required="required">
+        </span>
+        
+        </div>
+
+       <?php $erreur_email=email(); // erreur de email 
         if ($erreur_email!=false){
             echo $erreur_email;}?>
-        <div class="form_txt">Mot de passe :</div><input type="password" name="mdp" required="required">
+
+        <div id=mdp>
+        
+        <span class="form_mdp">Mot de passe :
+        <input id=m type="password" name="mdp" required="required">
+        </span>
+        
+        </div>
+
         <?php $erreur_mdp=mdp(); // erreur de mdp 
-        if ($erreur_mdp!=false){
+       if ($erreur_mdp!=false){
             echo $erreur_mdp;}?>
-        <input type="submit">
+
+        <input type="submit" value="S'inscrire" class="bouton">
+    
     </div>
+
     </form>
     <br/>
     <?php  //envoie vers BDD
