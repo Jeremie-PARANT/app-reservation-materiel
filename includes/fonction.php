@@ -5,53 +5,54 @@
     }
 </style>
 <?php
-// inscription erreur
-function prenom (){
+//     -----    INSCRIPTION   -----     //
+//erreur prenom
+function prenom(){
     if (empty($_POST['prenom'])) {
     }
-        else if (!empty($_POST['prenom'])) {
-        $prenom = ($_POST['prenom']);
-            if (strlen($prenom)<3) {
-                $erreur_prenom =  '<div class="erreur"> Votre prenom est trop court </div>';
-                return $erreur_prenom;
+    elseif (!empty($_POST['prenom'])) {
+    $prenom = ($_POST['prenom']);
+        if (strlen($prenom)<2) {
+            $erreur_prenom =  '<div class="erreur"> Votre prenom est trop court </div>';
+            return $erreur_prenom;
+        }
+        elseif (strlen($prenom)>100) {
+            $erreur_prenom =  '<div class="erreur"> Votre prenom est trop long </div>';
+            return $erreur_prenom;
+        }
+        elseif (!preg_match("#^[A-Z]+$#", $prenom[0])) {
+            $erreur_prenom =  '<div class="erreur"> La 1er lettre de votre prenom doit comporter une majuscule </div>';
+            return $erreur_prenom;
+        }
+        elseif (!preg_match("#^[a-zA-Z0-9'-. àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÕÃÑäëïöüÿÄËÏÖÜŸç]+$#", $prenom)) {
+            $erreur_prenom = '<div class="erreur"> Votre prenom contient des charactères non autorisé </div>';
+            return $erreur_prenom;
             }
-            elseif (strlen($prenom)>50) {
-                $erreur_prenom =  '<div class="erreur"> Votre prenom est trop long </div>';
-                return $erreur_prenom;
-            }
-            elseif (!preg_match("#^[A-Z]+$#", $prenom[0])) {
-                $erreur_prenom =  '<div class="erreur"> La 1er lettre de votre prenom doit comporter une majuscule </div>';
-                return $erreur_prenom;
-            }
-            elseif (!preg_match("#^[a-zA-Z0-9'-.àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÕÃÑäëïöüÿÄËÏÖÜŸç]+$#", $prenom)) {
-                $erreur_prenom = '<div class="erreur"> Votre prenom contient des charactères non autorisé </div>';
-                return $erreur_prenom;
-             }
-            else {
-                return false;
-            }
+        else {
+            return false;
+        }
     }
 }
 
-function nom (){
+//erreur nom
+function nom(){
     if (empty($_POST['nom'])) {
-
     }
-        else if (!empty($_POST['nom'])) {
+        elseif (!empty($_POST['nom'])) {
         $nom = ($_POST['nom']);
-        if (strlen($nom)<3) {
+        if (strlen($nom)<2) {
             $erreur_nom =  '<div class="erreur"> Votre nom est trop court </div>';
             return $erreur_nom;
         }
-        elseif (strlen($nom)>50) {
+        elseif (strlen($nom)>100) {
             $erreur_nom =  '<div class="erreur"> Votre nom est trop long </div>';
             return $erreur_nom;
         }
         elseif (!preg_match("#^[A-Z]+$#", $nom[0])) {
-            $erreur_nom =  '<div class="erreur"> La 1er lettre de votre pnom doit comporter une majuscule </div>';
+            $erreur_nom =  '<div class="erreur"> La 1er lettre de votre nom doit comporter une majuscule </div>';
             return $erreur_nom;
         }
-        elseif (!preg_match("#^[a-zA-Z0-9'-.àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÕÃÑäëïöüÿÄËÏÖÜŸç]+$#", $nom)) {
+        elseif (!preg_match("#^[a-zA-Z0-9'-. àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÕÃÑäëïöüÿÄËÏÖÜŸç]+$#", $nom)) {
             $erreur_nom =  '<div class="erreur"> Votre nom contient des charactères non autorisé </div>';
             return $erreur_nom;
          }
@@ -61,19 +62,21 @@ function nom (){
     }
 }
 
-function validateDate($naissance, $format) //utiliser dans function naissance
+//Valide date de naissance
+function validateDate($naissance, $format)
 {
     if (DateTime::createFromFormat($format, $naissance)==true){
         return true;
     }
 }
 
-function naissance (){
+//erreur naissance
+function naissance(){
     $vieux = "1900-00-00 00:00:00";
     if (empty($_POST['naissance'])) {
 
     }
-        else if (!empty($_POST['naissance'])) {
+        elseif (!empty($_POST['naissance'])) {
         $naissance = ($_POST['naissance']);
         $today = date("Y-m-d H:i:s");
         $format = 'Y-m-d';
@@ -96,11 +99,12 @@ function naissance (){
     }
 }
 
-function email (){
+//erreur email
+function email(){
     if (empty($_POST['email'])) {
 
     }
-        else if (!empty($_POST['email'])) {
+        elseif (!empty($_POST['email'])) {
         $email = ($_POST['email']);
         if (strlen($email)<3) {
             $erreur_email = '<div class="erreur"> Votre email est trop court </div>';
@@ -120,18 +124,19 @@ function email (){
     }
 }
 
-function mdp (){
+//erreur mdp
+function mdp(){
     if (empty($_POST['mdp'])) {
 
     }
-        else if (!empty($_POST['mdp'])) {
+        elseif (!empty($_POST['mdp'])) {
         $mdp = ($_POST['mdp']);
-        if (strlen($mdp)<8) {
-            $erreur_mdp = '<div class="erreur"> Votre mdp est trop court </div>';
+        if (strlen($mdp)<6) {
+            $erreur_mdp = '<div class="erreur"> Au moins 6 charactères </div>';
             return $erreur_mdp;
         }
         elseif (strlen($mdp)>100) {
-            $erreur_mdp = '<div class="erreur"> Votre mdp est trop long </div>';
+            $erreur_mdp = '<div class="erreur"> Maximum 100 charactères </div>';
             return $erreur_mdp;
         }
             elseif (!preg_match("#^[a-zA-Z0-9()!-.?_`~;:ù&*+=^%\#\$[\]]+$#",$mdp)) {//
@@ -145,6 +150,190 @@ function mdp (){
     }
     else {
         return false;
+    }
+}
+//     -----    INSCRIPTION   -----     //
+
+
+
+//     -----    MATERIEL   -----     //
+//inscription materiel
+function image($type){
+    if (!empty($type)) {
+        $type = htmlspecialchars($type);
+        if ($type=="micro"){
+            return '<img src="images/'.$type.'.png" class="image"></img>';
+        }
+        elseif ($type=="camera"){
+            return '<img src="images/'.$type.'.png" class="image"></img>';
+        }
+        elseif ($type=="trepied"){
+            return '<img src="images/'.$type.'.png" class="image"></img>';
+        }
+        elseif ($type=="fond_vert"){
+            return '<img src="images/'.$type.'.png" class="image"></img>';
+        }
+        else {
+            return '<img src="images/no_image.png" class="image"></img>';
+        }
+    }
+    else {
+        return '<img src="images/no_image.png" class="image"></img>';
+    }
+}
+
+//description pas trop longue
+function decription100($description){
+    if (strlen(htmlspecialchars($description))>100){
+        $description = substr($description, 0, 100) . '...' ;
+        return $description;
+    }
+    else {
+        return htmlspecialchars($description);
+    }
+}
+
+//     -----    MATERIEL   -----     //
+
+
+
+//     -----    RESERVATION   -----     //
+//reservation date début
+function date_debut(){
+    $vieux = "1900-00-00 00:00:00";
+    if (empty($_POST['date_debut'])) {
+
+    }
+        elseif (!empty($_POST['date_debut'] && !empty($_POST['date_fin']))) {
+        $date_debut = ($_POST['date_debut']);
+        $date_fin = ($_POST['date_fin']);
+        $today = date("Y-m-d H:i:s");
+        $format = 'Y-m-d';
+        $validate_date = DateTime::createFromFormat($format, $date_debut);
+        if ((validateDate($date_debut, $format))!=true){
+            $erreur_date_debut = '<div class="erreur"> pas une date </div>';
+            return $erreur_date_debut;
+        }
+        elseif ($date_debut < $today) {
+            $erreur_date_debut = '<div class="erreur"> Vous ne pouvez pas prendre de commande pour le passer </div>';
+            return $erreur_date_debut;
+        }
+        elseif ($date_debut > $_POST['date_fin']) {
+            $erreur_date_debut = '<div class="erreur"> La date de fin ne doit pas précèder la date de début </div>';
+            return $erreur_date_debut;
+        }
+        else {
+            return false;
+        }
+    }
+}
+
+//reservation date fin
+function date_fin(){
+    $vieux = "1900-00-00 00:00:00";
+    if (empty($_POST['date_fin'])) {
+
+    }
+        elseif (!empty($_POST['date_fin'] && !empty($_POST['date_fin']))) {
+        $date_fin = ($_POST['date_fin']);
+        $date_fin = ($_POST['date_fin']);
+        $today = date("Y-m-d H:i:s");
+        $format = 'Y-m-d';
+        $validate_date = DateTime::createFromFormat($format, $date_fin);
+        if ((validateDate($date_fin, $format))!=true){
+            $erreur_date_fin = '<div class="erreur"> pas une date </div>';
+            return $erreur_date_fin;
+        }
+        elseif ($date_fin < $today) {
+            $erreur_date_fin = '<div class="erreur"> Vous ne pouvez pas prendre de commande pour le passer  ou pour le jour même</div>';
+            return $erreur_date_fin;
+        }
+        elseif ($date_fin > $_POST['date_fin']) {
+            $erreur_date_fin = '<div class="erreur"> La date de fin ne doit pas précèder la date de début </div>';
+            return $erreur_date_fin;
+        }
+        else {
+            return false;
+        }
+    }
+}
+
+//     -----    RESERVATION   -----     //
+//reservation date collide
+function reservation_collide(){
+    if (date_debut()==false && date_fin()==false){
+        if (!empty($_POST['date_debut']) && !empty($_POST['date_fin']) && !empty($_POST['nom'])){
+
+            $link = mysqli_connect("localhost", "root", "", "sae_203");
+            $materiel_ref = mysqli_real_escape_string($link, $_POST['nom']);
+
+            $result_check_reservation = mysqli_query($link, "SELECT * FROM reservations WHERE reference='$materiel_ref' AND demande='accepte'");
+
+            $date_debut = htmlspecialchars($_POST['date_debut']);
+            $date_fin = htmlspecialchars($_POST['date_fin']);
+
+            $erreur_date_collide = '<div class="erreur"> Ce matériel a déjà été reserver au date suivante : <ul>';
+            if (mysqli_num_rows($result_check_reservation) > 0) {
+                while ($row_check_reservation = mysqli_fetch_assoc($result_check_reservation)){
+                    if ($row_check_reservation['datedebut'] <= $date_debut && $row_check_reservation['datefin'] >= $date_debut OR $row_check_reservation['datedebut'] <= $date_fin && $row_check_reservation['datefin'] >= $date_debut){
+                        $erreur_date_collide = $erreur_date_collide . '<li>' . $row_check_reservation['datedebut'] . ', '. $row_check_reservation['datefin'] . '</li>';
+                    }
+                }
+            $erreur_date_collide = $erreur_date_collide . '</ul></div>';
+            return $erreur_date_collide;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}
+
+//reservation date collide validation
+function reservation_collide_validation(){
+    if (!empty($_GET['numreserv'])) {
+        $link = mysqli_connect("localhost", "root", "", "sae_203");
+        $numreserv = $_GET['numreserv'];
+
+        $result_current_materiel = mysqli_query($link, "SELECT materiels.reference FROM materiels
+        JOIN reservations on reservations.reference = materiels.reference
+        WHERE reservations.numreserv = '$numreserv'");
+        $result_current_date = mysqli_query($link, "SELECT datedebut, datefin FROM reservations
+        WHERE numreserv = '$numreserv'");
+
+        $row_current_materiel = mysqli_fetch_assoc($result_current_materiel);
+        $row_current_date = mysqli_fetch_assoc($result_current_date);
+
+        $current_materiel = $row_current_materiel['reference'];
+        $date_debut = $row_current_date['datedebut'];
+        $date_fin = $row_current_date['datefin'];
+        $today = date("Y-m-d H:i:s");
+
+        $result_check_reservation = mysqli_query($link, "SELECT * FROM reservations WHERE reference='$current_materiel' AND demande='accepte'");
+        
+        //echo $current_materiel.$current_date_debut.$current_date_fin;
+
+        $erreur_date_collide = '<div class="erreur"> Ce matériel a déjà été reserver au date suivante : <ul>';
+        if($date_debut > $today){
+            if (mysqli_num_rows($result_check_reservation) > 0) {
+                while ($row_check_reservation = mysqli_fetch_assoc($result_check_reservation)){
+                    if ($row_check_reservation['datedebut'] <= $date_debut && $row_check_reservation['datefin'] >= $date_debut OR $row_check_reservation['datedebut'] <= $date_fin && $row_check_reservation['datefin'] >= $date_debut){
+                        $date_debut = $row_check_reservation['datedebut'];
+                        $date_fin = $row_check_reservation['datefin'];
+                        $erreur_date_collide = $erreur_date_collide . '<li>' . $date_debut . ', '. $date_fin . '</li>';
+                    }
+                }
+            $erreur_date_collide = $erreur_date_collide . '</ul></div>';
+            return $erreur_date_collide;
+            }
+            else {
+                return false;
+            }
+        }
+        else{
+            $erreur_date = '<div class="erreur"> Ne peut pas accepté une demande du passé ou pour le jour même</div>';
+            return $erreur_date;
+        }
     }
 }
 ?>
