@@ -228,6 +228,7 @@ function date_debut(){
     }
 }
 
+//reservation date fin
 function date_fin(){
     $vieux = "1900-00-00 00:00:00";
     if (empty($_POST['date_fin'])) {
@@ -244,7 +245,7 @@ function date_fin(){
             return $erreur_date_fin;
         }
         elseif ($date_fin < $today) {
-            $erreur_date_fin = '<div class="erreur"> Vous ne pouvez pas prendre de commande pour le passer </div>';
+            $erreur_date_fin = '<div class="erreur"> Vous ne pouvez pas prendre de commande pour le passer  ou pour le jour même</div>';
             return $erreur_date_fin;
         }
         elseif ($date_fin > $_POST['date_fin']) {
@@ -258,24 +259,80 @@ function date_fin(){
 }
 
 //     -----    RESERVATION   -----     //
-
+//reservation date collide
 function reservation_collide(){
     if (date_debut()==false && date_fin()==false){
-        if (!empty($_POST['date_debut']) && !empty($_POST['date_fin'] && !empty($_POST['nom']))){
+        if (!empty($_POST['date_debut']) && !empty($_POST['date_fin']) && !empty($_POST['nom'])){
+
             $link = mysqli_connect("localhost", "root", "", "sae_203");
             $materiel_ref = mysqli_real_escape_string($link, $_POST['nom']);
-            $date_debut = ($_POST['date_debut']);
-            $date_fin = ($_POST['date_fin']);
+
             $result_check_reservation = mysqli_query($link, "SELECT * FROM reservations WHERE reference='$materiel_ref' AND demande='accepte'");
-            while ($row__check_reservation = mysqli_fetch_assoc($result_check_reservation)){
-                if ($row__check_reservation['datedebut'] <= $date_debut && $row__check_reservation['datefin'] >= $date_debut OR $row__check_reservation['datedebut'] <= $date_fin && $row__check_reservation['datefin'] >= $date_debut){
-                    $erreur_date_collide = '<div class="erreur"> Ce matériel a déjà été reserver au date suivante </div>';
-                    return $erreur_date_collide;
+
+            $date_debut = htmlspecialchars($_POST['date_debut']);
+            $date_fin = htmlspecialchars($_POST['date_fin']);
+
+            $erreur_date_collide = '<div class="erreur"> Ce matériel a déjà été reserver au date suivante : <ul>';
+            if (mysqli_num_rows($result_check_reservation) > 0) {
+                while ($row_check_reservation = mysqli_fetch_assoc($result_check_reservation)){
+                    if ($row_check_reservation['datedebut'] <= $date_debut && $row_check_reservation['datefin'] >= $date_debut OR $row_check_reservation['datedebut'] <= $date_fin && $row_check_reservation['datefin'] >= $date_debut){
+                        $erreur_date_collide = $erreur_date_collide . '<li>' . $row_check_reservation['datedebut'] . ', '. $row_check_reservation['datefin'] . '</li>';
+                    }
                 }
-                else {
-                    return false;
-                }
+            $erreur_date_collide = $erreur_date_collide . '</ul></div>';
+            return $erreur_date_collide;
             }
+            else {
+                return false;
+            }
+        }
+    }
+}
+
+//reservation date collide validation
+function reservation_collide_validation(){
+    if (!empty($_GET['numreserv'])) {
+        $link = mysqli_connect("localhost", "root", "", "sae_203");
+        $numreserv = $_GET['numreserv'];
+
+        $result_current_materiel = mysqli_query($link, "SELECT materiels.reference FROM materiels
+        JOIN reservations on reservations.reference = materiels.reference
+        WHERE reservations.numreserv = '$numreserv'");
+        $result_current_date = mysqli_query($link, "SELECT datedebut, datefin FROM reservations
+        WHERE numreserv = '$numreserv'");
+
+        $row_current_materiel = mysqli_fetch_assoc($result_current_materiel);
+        $row_current_date = mysqli_fetch_assoc($result_current_date);
+
+        $current_materiel = $row_current_materiel['reference'];
+        $date_debut = $row_current_date['datedebut'];
+        $date_fin = $row_current_date['datefin'];
+        $today = date("Y-m-d H:i:s");
+
+        $result_check_reservation = mysqli_query($link, "SELECT * FROM reservations WHERE reference='$current_materiel' AND demande='accepte'");
+        
+        //echo $current_materiel.$current_date_debut.$current_date_fin;
+
+        $erreur_date_collide = '<div class="erreur"> Ce matériel a déjà été reserver au date suivante : <ul>';
+        if($date_debut > $today){
+            if (mysqli_num_rows($result_check_reservation) > 0) {
+                while ($row_check_reservation = mysqli_fetch_assoc($result_check_reservation)){
+                    if ($row_check_reservation['datedebut'] <= $date_debut && $row_check_reservation['datefin'] >= $date_debut OR $row_check_reservation['datedebut'] <= $date_fin && $row_check_reservation['datefin'] >= $date_debut){
+                        $date_debut = $row_check_reservation['datedebut'];
+                        $date_fin = $row_check_reservation['datefin'];
+                        $erreur_date_collide = $erreur_date_collide . '<li>' . $date_debut . ', '. $date_fin . '</li>';
+                    }
+                }
+            $erreur_date_collide = $erreur_date_collide . '</ul></div>';
+            return $erreur_date_collide;
+            }
+            else {
+                return false;
+            }
+        }
+        else{
+            $erreur_date = '<div class="erreur"> Ne peut pas accepté une demande du passé ou pour le jour même</div>';
+            return $erreur_date;
         }
     }
 }

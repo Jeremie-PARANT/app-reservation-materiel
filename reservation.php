@@ -31,8 +31,8 @@ else { //FORMULAIRE
     $result_all_material = mysqli_query($link, "SELECT nom, reference FROM materiels");
     
     while ($row_all_material = mysqli_fetch_assoc($result_all_material)){
-        $nom = mysqli_real_escape_string($link, $row_all_material['nom']);
-        $reference = mysqli_real_escape_string($link, $row_all_material['reference']);
+        $nom = htmlspecialchars($row_all_material['nom']);
+        $reference = htmlspecialchars($row_all_material['reference']);
         echo '<option value="'.$reference.'">'.$nom.' : '.$reference.'</option>';
     }
 
