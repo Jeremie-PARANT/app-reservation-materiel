@@ -16,9 +16,9 @@
     <div class="inscription">Inscription</div>
 
 
-    <?php include_once('includes/fonction.php'); ?>
-
-
+    <?php include_once('includes/fonction.php'); 
+    include_once('includes/variable.php'); 
+    ?>
 
     <form action="inscription.php" method="post">
 

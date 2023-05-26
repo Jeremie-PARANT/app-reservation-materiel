@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/tableau.css">
     <title>Panier</title>
 </head>
 <body><?php
@@ -41,7 +42,7 @@
             join materiels on materiels.reference=reservations.reference
             JOIN utilisateurs on utilisateurs.mail=reservations.mail
             WHERE utilisateurs.mail LIKE '$mail_reserv' AND materiels.nom LIKE '$nom_materiel%'");
-            echo "<table border=1>" ;
+            echo "<table>" ;
             //Echo le tableau
             while ($row_reservation = mysqli_fetch_assoc($result_reservation)) {
                 //Variable
@@ -110,8 +111,8 @@
             WHERE utilisateurs.mail LIKE '$mail_reserv' AND materiels.nom LIKE '$nom_materiel%'");
 
                 //   ---   TABLEAU EN ATTENTE  ---   //
-            echo "<table border=1>" ;
-            echo "<h1>Réservation en attente</h1>";
+            echo "<table>" ;
+            echo "<div class=\"reserve\">Réservation en attente</div>";
             while ($row_reservation = mysqli_fetch_assoc($result_reservation)) {
                 //Variable
                 $nom = htmlspecialchars($row_reservation['nom']);
@@ -130,10 +131,10 @@
                     . $type ."</br>"
                     . $user_mail ."</br>"
                     . $date_debut ." : ". $date_fin .
-                    "</br><div class=\"attente\"> en attente </div>";
+                    "</br><div class=\"attente\"> en attente </div></br>";
 
                     //details de la reservation
-                    echo "<a href=\"reservation_details.php?numreserv=". $numreserv ."\"><div id=\"details\">details</div></a>" . "</TD>" ;
+                    echo "<a href=\"reservation_details.php?numreserv=". $numreserv ."\"><div class=\"details\">details</div></a>" . "</TD>" ;
                 }
             }
 
@@ -147,8 +148,8 @@
 
             echo " </tr> </table> " ;
             
-            echo "<table border=1>" ;
-            echo "<h1>Réservation acceptées/refusées</h1>";
+            echo "<table>" ;
+            echo "<div class=\"reserve\">Réservation acceptées/refusées</div>";
             while ($row_reservation = mysqli_fetch_assoc($result_reservation)) {
                 //Variable
                 $nom = htmlspecialchars($row_reservation['nom']);
@@ -170,17 +171,17 @@
 
                     //echo demande (validation)
                     if ($demande == 'accepte'){
-                        echo '<div class="accepte"> acceptée </div>';
+                        echo '<div class="accepte"> acceptée </div></br>';
                     }
                     elseif ($demande == 'refuse'){
-                        echo '<div class="refuse"> refusée </div>';
+                        echo '<div class="refuse"> refusée </div></br>';
                     }
                     else {
                         echo '<div class="erreur"> demande incorrecte </div>';
                     }
 
                     //details de la reservation
-                    echo "<a href=\"reservation_details.php?numreserv=". $numreserv ."\"><div id=\"details\">details</div></a>" . "</TD>" ;
+                    echo "<a href=\"reservation_details.php?numreserv=". $numreserv ."\"><div class=\"details\">details</div></a>" . "</TD>" ;
                 }
             }
             echo " </tr> </table> " ;

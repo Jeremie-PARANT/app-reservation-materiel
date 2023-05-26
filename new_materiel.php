@@ -8,7 +8,6 @@
 <?php
     include_once('includes/fonction_mat.php');
     include_once('includes/variable.php');
-    include_once('includes/header.php');
 ?>
 </head>
 <body>
