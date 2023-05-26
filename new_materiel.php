@@ -122,6 +122,7 @@ $reference = $_POST['reference'];
 
 
 
+
 // Vérifier les autorisations et les références
 $query = "SELECT autorisation FROM utilisateurs WHERE mail='$mail';";
 $queryref = "SELECT reference FROM materiels WHERE reference='$reference';";
