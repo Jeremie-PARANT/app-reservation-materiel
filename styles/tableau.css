@@ -30,42 +30,51 @@ table {
     padding:7px;
     font-size: 20px;
     font-weight: 600;
-    margin-right: 600px;
-        text-align: center;
+    text-align: center;
+    width: 85px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: underline;
 }
 
 .accepte{
     color :white;
     background-color:#4ccc19;
     border-style: none;
-    border-radius: 30px;
+    border-radius: 10px;
     padding:7px;
-    font-size: 20px;
-    font-weight: 600;
-    margin-right: 600px;
+    font-size: 16px;
+    font-weight: 450;
     text-align: center;
+    width: 85px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .refuse{
     color :white;
     background-color:#db1313;
     border-style: none;
-    border-radius: 30px;
+    border-radius: 10px;
     padding:7px;
-    font-size: 20px;
-    font-weight: 600;
-    margin-right: 600px;
+    font-size: 16px;
+    font-weight: 450;
     text-align: center;
+    width: 85px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .attente{
     color :white;
     background-color:#757575;
     border-style: none;
-    border-radius: 30px;
+    border-radius: 10px;
     padding:7px;
-    font-size: 20px;
-    font-weight: 600;
-    margin-right: 600px;
+    font-size: 16px;
+    font-weight: 450;
     text-align: center;
+    width: 85px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

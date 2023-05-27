@@ -29,7 +29,7 @@ a {
 </style>
 
 <header>
-    <a href="connexion.php"><img src="images/avatar.png" /></a>
-    <a href="connexion.php"><div class="connexion">Connexion</div></a>
+    <a href="index.php"><img src="images/avatar.png" /></a>
+    <a href="index.php"><div class="connexion">Connexion</div></a>
     
 </header>
