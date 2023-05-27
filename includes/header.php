@@ -143,7 +143,7 @@ background-color: white;
 
 <?php
      include_once('includes/variable.php');
-     if ($autorisation==1){
+     if (!empty ($autorisation) && $autorisation==1){
         echo '<a href="new_materiel.php"><div class="ajouter">Ajouter Materiel</div></a>';
      }
 ?>

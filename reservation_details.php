@@ -67,7 +67,6 @@ else{
                 }
                 echo ' </tr> </table> ' ;
 
-                //include_once('includes/footer.php');
                 break;
             }
             else {
@@ -98,5 +97,6 @@ else{
                 }
         }
     }
+    include_once('includes/footer.php');
 }
 ?></body>
