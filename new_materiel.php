@@ -8,16 +8,20 @@
 <?php
     include_once('includes/fonction_mat.php');
     include_once('includes/variable.php');
+
     include_once('includes/header.php');
     
+
 ?>
 </head>
 <body>
 <?php 
+
 if (empty($_SESSION['mail'])){ //Vérifie connection
     include_once('includes/redirection_connexion.php');
 }
 else{
+
             //Début Formulaire nouveau matériel
             echo "<form action='new_materiel.php' method='post'>
     <div id=\"div_formulaire\">
@@ -31,6 +35,7 @@ else{
         //Contenu des informations pour remplir le Formulaire
         echo "<div id=\"container\">
             <div id=\"div_info\">";
+
 
 
 
@@ -54,7 +59,9 @@ else{
                     <option value=\"\">-- Type de matériel --</option>
                     <option value=\"camera\">Caméra</option>
                     <option value=\"micro\">micro</option>
+
                     <option value=\"fond_vert\">Fond vert</option>
+
                     <option value=\"Trépied\">Trépied</option>
                 </select>
     

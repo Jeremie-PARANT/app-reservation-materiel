@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/reservation.css">
     <title>Reservation</title>
 </head>
 <body><?php
@@ -25,9 +26,9 @@ else { //FORMULAIRE
     
 
     //Select reférence forms
-    echo '<h1>Faire une réservation :</h1>
-    <form action="'.$url.'" method=\'post\'>
-    <select class="champs_info" name="nom" required="required">';//Selectionne tous les matériel
+    echo '<div class="reserve"> Faire une réservation : </div>
+    <form class="form_block" action="'.$url.'" method=\'post\'>
+    <div id=type><span class="form_type">Type : <select id="c" name="nom" required="required"></span>';//Selectionne tous les matériel
     $result_all_material = mysqli_query($link, "SELECT nom, reference FROM materiels");
     
     while ($row_all_material = mysqli_fetch_assoc($result_all_material)){
@@ -35,13 +36,13 @@ else { //FORMULAIRE
         $reference = htmlspecialchars($row_all_material['reference']);
         echo '<option value="'.$reference.'">'.$nom.' : '.$reference.'</option>';
     }
-
+    echo '</div>';
 
 
     //DATE
     //Date debut 
     echo '</select>
-    <div class="form_txt">Date de début : </div><input type="date" name="date_debut" required="required">';
+    <div id=reserve><span class="form_debut">Date de début : <input id=d type="date" name="date_debut" required="required"></span>';
     $erreur_date_debut=date_debut();// erreur de date_debut 
     if ($erreur_date_debut!=false){
         echo $erreur_date_debut;
@@ -49,17 +50,19 @@ else { //FORMULAIRE
 
 
     //Date fin
-    echo '<div class="form_txt">Date de fin : </div><input type="date" name="date_fin" required="required">';
+    echo '<span class="form_fin">Date de fin : <input id=f type="date" name="date_fin" required="required"></span>';
     $erreur_date_fin=date_fin(); // erreur de date_fin 
     if ($erreur_date_fin!=false){
         echo $erreur_date_fin;
     }
-    echo '</br><input type="submit">
+    echo '</div>';
+    echo '<input id="b_reserver" type="submit" value="Réserver">
     </form>';
     $erreur_reservation_collide=reservation_collide(); // erreur réservation collide
     if (reservation_collide()!=false){
         echo $erreur_reservation_collide;
     }
+    
 
 
 
@@ -90,13 +93,13 @@ else { //FORMULAIRE
             $date_debut = mysqli_real_escape_string($link, $_POST['date_debut']);
             $date_fin = mysqli_real_escape_string($link, $_POST['date_fin']);
             $demande = 'en_attente';
-            echo 'envoie vers la BDD';
+            echo 'reservation en attente (voir "mes reservation")';
             $result_reservation = mysqli_query($link, "INSERT INTO reservations(datedebut, datefin, demande, mail, reference) VALUES ('$date_debut', '$date_fin', '$demande', '$user', '$materiel_ref')");
         }
     }
 
 
-    include_once('includes/footer.php');
+    //include_once('includes/footer.php');
 }
 
 ?></body>

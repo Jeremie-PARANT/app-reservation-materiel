@@ -4,31 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="connexion.css">
+
+    <link rel="stylesheet" href="styles/connexion.css">
     <title>Document</title>
 </head>
 <body>
+
 <?php 
 include_once('includes/header_authentication.php'); 
+include_once('includes/variable.php');
 ?>
+
+<div class="connection">Connexion</div>
     <form action="index.php" method="post">
+
+
+
         <div class="form_block">
-       <div class="form_txt">Email :</div>   
-       <input type="text" name="mail" required="required">
-       <div class="form_txt">Mot de passe :</div>   
-       <input type="password" name="mdp" required="required">
+        <div id="co">
+
+       <span class="form_email">Email :   
+       <input id=e type="text" name="mail" required="required"></span>
+       
+       <span class="form_mdp">Mot de passe :  
+       <input id=m type="password" name="mdp" required="required"></span> 
         </div>
-        <input type="submit" value="Se connecter">
-        
+        <input id="b_connexion" type="submit" value="Se connecter">
+         
+        </div>
     </form>
 
-    <a href="inscription.php"> <input id="b_inscription" type="submit" value="S'inscrire"> </a>
+   <a href="inscription.php"> <input id="b_inscription" type="submit" value="S'inscrire"> </a>
+
 
     <?php
    
 session_start();
 
-   $link = mysqli_connect("localhost", "root", "", "sae_203");
+
+
 
    if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {
        $mail = $_POST['mail'];
