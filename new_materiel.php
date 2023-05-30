@@ -8,6 +8,8 @@
 <?php
     include_once('includes/fonction_mat.php');
     include_once('includes/variable.php');
+    include_once('includes/header.php');
+    include_once('includes/footer.php');
 ?>
 </head>
 <body>
@@ -52,7 +54,7 @@ else{
                     <option value=\"\">-- Type de matériel --</option>
                     <option value=\"camera\">Caméra</option>
                     <option value=\"micro\">micro</option>
-                    <option value=\"light\">light</option>
+                    <option value=\"fond_vert\">Fond vert</option>
                     <option value=\"Trépied\">Trépied</option>
                 </select>
     
@@ -110,7 +112,7 @@ else{
     
 
     //Définir les matériels et ne pas pouvoir les modifier
-    define('ALLOWED_TYPES', ['camera', 'Trépied', 'micro', 'light']);
+    define('ALLOWED_TYPES', ['camera', 'Trépied', 'micro', 'fond_vert']);
 
 
 
