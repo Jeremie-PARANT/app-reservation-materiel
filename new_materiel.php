@@ -40,12 +40,14 @@ else{
 
 
                 //Inserer le Nom du matériel
-                echo "<p>Nom : </p>
+                echo "<div id=\"Nom_mat\">
+                <p>Nom : </p>
                 <input class=\"champs_info\" type=\"text\" name=\"nom\" required=\"required\">";
                 $erreur_nom=noms(); // erreur de noms 
                 if ($erreur_nom!=false){
                 echo $erreur_nom;
                 }   
+                echo "</div>";
                 echo "<br>
                 <br>";
 
@@ -53,7 +55,8 @@ else{
 
 
                 //Inserer le Type du matériel, on peux ajouter si besoin
-                echo "<p>Type : </p>
+                echo "<div id=\"type_mat\">
+                <p>Type : </p>
                 <select class=\"champs_info\" name=\"type\" required=\"required\">
                     <option value=\"\">-- Type de matériel --</option>
                     <option value=\"camera\">Caméra</option>
@@ -63,26 +66,31 @@ else{
 
                     <option value=\"Trépied\">Trépied</option>
                 </select>
-    
+                </div>
                 <br>
                 <br>";
 
 
 
                 //Inserer la Réference du matériel (que des chiffres)
-                echo "<p>Référence : </p>
+                echo "<div id=\"ref_mat\"> 
+                <p>Référence : </p>
                 <input class=\"champs_info\" type=\"text\" name=\"reference\" required=\"required\">";
+                
                 
 
                 $erreur_reference=reference(); // erreur de noms 
                 if ($erreur_reference!=false){
                 echo $erreur_reference;
                 }
-
+                echo "</div>";
             
             echo "</div>";
 
-
+                echo "<br>";
+                echo "<br>";
+                echo "<br>";
+                
 
             //Ajouter une description au matériel
             echo "<div id=\"description\">
