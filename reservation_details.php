@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/tableau.css">
     <title>Details de la réservation</title>
 </head>
 <body><?php
@@ -21,6 +22,7 @@ else{
         include_once('includes/fonction.php');
         include_once('includes/header.php');
 
+        //Query BDD
         $numreserv = $_GET['numreserv'];
         $result_current_reserv = mysqli_query($link, "SELECT utilisateurs.mail, materiels.nom, materiels.nom, materiels.type, materiels.description, materiels.reference, reservations.numreserv, reservations.datedebut , reservations.datefin, reservations.demande from reservations
         join materiels on materiels.reference=reservations.reference
@@ -40,14 +42,17 @@ else{
                 $user_mail = htmlspecialchars($row_current_reserv['mail']);
                 $description = htmlspecialchars($row_current_reserv['description']);
                 
-                //Tableau
-                echo '<table border=1>';
+                //TABLEAU
+                echo '<div class="reserve">Détails de la réservation</div>
+                <table>';
                 echo "<tr> <td>" . image($type) . "</td>
                 <td>". $nom ." : ". $reference ."</br>"
                 . $type ."</br>"
                 . $description ."</br>"
                 . $user_mail ."</br>"
                 . $date_debut ." : ". $date_fin;
+                
+                //echo demande (validation)
                 if ($demande == 'en_attente'){
                     echo '<div class="attente"> en attente </div>';
                 }
@@ -62,7 +67,6 @@ else{
                 }
                 echo ' </tr> </table> ' ;
 
-                //include_once('includes/footer.php');
                 break;
             }
             else {
@@ -93,5 +97,6 @@ else{
                 }
         }
     }
+    include_once('includes/footer.php');
 }
 ?></body>

@@ -10,15 +10,16 @@
 </head>
 
 <body>
+    
     <?php include_once('includes/header_authentication.php'); ?>
 
 
     <div class="inscription">Inscription</div>
 
 
-    <?php include_once('includes/fonction.php'); ?>
-
-
+    <?php include_once('includes/fonction.php'); 
+    include_once('includes/variable.php'); 
+    ?>
 
     <form action="inscription.php" method="post">
 
@@ -105,12 +106,14 @@
                     $query = "INSERT INTO utilisateurs(prenom, nom, naissance, mdp, mail) VALUES ('$prenom', '$nom', '$naissance', '$hashedPassword', '$email')";
                     mysqli_query($link, $query);
                     echo 'vous etes inscrits';
-                    header("location: connexion.php");
+                    header("location: index.php");
                 }
             }
         }
     ?>
+    
     <?php include_once('includes/footer.php'); ?>
+    
 </body>
 
 </html>

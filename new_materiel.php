@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,10 +8,19 @@
 <?php
     include_once('includes/fonction_mat.php');
     include_once('includes/variable.php');
+
+    include_once('includes/header.php');
+    
+
 ?>
 </head>
 <body>
 <?php 
+
+if (empty($_SESSION['mail'])){ //Vérifie connection
+    include_once('includes/redirection_connexion.php');
+}
+else{
 
             //Début Formulaire nouveau matériel
             echo "<form action='new_materiel.php' method='post'>
@@ -25,6 +35,7 @@
         //Contenu des informations pour remplir le Formulaire
         echo "<div id=\"container\">
             <div id=\"div_info\">";
+
 
 
 
@@ -48,7 +59,9 @@
                     <option value=\"\">-- Type de matériel --</option>
                     <option value=\"camera\">Caméra</option>
                     <option value=\"micro\">micro</option>
-                    <option value=\"light\">light</option>
+
+                    <option value=\"fond_vert\">Fond vert</option>
+
                     <option value=\"Trépied\">Trépied</option>
                 </select>
     
@@ -106,13 +119,14 @@
     
 
     //Définir les matériels et ne pas pouvoir les modifier
-    define('ALLOWED_TYPES', ['camera', 'Trépied', 'micro', 'light']);
+    define('ALLOWED_TYPES', ['camera', 'Trépied', 'micro', 'fond_vert']);
 
 
 
 // Vérifier si la référence n'est pas vide
 if (!empty($_POST['reference'])) {
 $reference = $_POST['reference'];
+
 
 
 
@@ -165,9 +179,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 }   
 }
 
+}
 
-
-mysqli_close($link);
+include_once('includes/footer.php');
 
 ?>
 </body>

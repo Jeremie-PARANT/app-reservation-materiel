@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="styles/connexion.css">
     <title>Document</title>
 </head>
@@ -35,9 +36,12 @@ include_once('includes/variable.php');
 
    <a href="inscription.php"> <input id="b_inscription" type="submit" value="S'inscrire"> </a>
 
+
     <?php
    
 session_start();
+
+
 
 
    if (!empty($_POST['mail']) && !empty($_POST['mdp'])) {

@@ -5,10 +5,12 @@ header {
     justify-content: center;
     height: 50px;
     background-color: #09A491;
+
     width: 100%;
+
 }
 img {
-    padding-left: 1300px;
+    
     padding-top: 10px;
     width : 30px;
     height : 30px;
@@ -30,7 +32,10 @@ a {
 </style>
 
 <header>
-    <a href="connexion.php"><img src="images/avatar.png" /></a>
-    <a href="connexion.php"><div class="connexion">Connexion</div></a>
+
+    <img src="images/avatar.png" />
+
+
+    <a href="index.php"><div class="connexion">Connexion</div></a>
     
 </header>
