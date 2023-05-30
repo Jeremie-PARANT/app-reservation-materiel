@@ -5,8 +5,9 @@ header {
     justify-content: center;
     height: 50px;
     background-color: #09A491;
-    justify-content: right;
-    padding-right: 10px;
+
+    width: 100%;
+
 }
 img {
     

@@ -79,6 +79,23 @@ table {
     margin-bottom: 10px;
 }
 
-.rech_droite{
-    text-align: right;
+/* Bar de recherche */
+
+.rech_form{
+    display: flex;
+    justify-content: right;
+    margin-right: 50px;
+    margin-top: 20px;
+}
+
+.rech_txt{
+    font-size: 20px;
+    padding-top: 3px;
+    margin-right: 10px;
+}
+
+.rech_input{
+    border-radius: 10%;
+    border-width: 7px;
+    height: 20px;
 }
