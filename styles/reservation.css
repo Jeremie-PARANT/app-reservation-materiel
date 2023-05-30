@@ -8,6 +8,7 @@
     font-size: 30px;
     font-weight: 700;
     margin-top: 100px;
+    
 }
 .form_block {
     border-width:7px;
@@ -23,13 +24,13 @@
 }
 
 .form_type {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 20px;
     padding: 5px;
     margin-right: 10px;
     margin-top: 3px;
     margin-bottom: 10px;
-    background-color: rgb(65, 65, 65);
+ 
     border-radius: 10px;
 
 }
@@ -43,6 +44,9 @@
     margin-bottom: 3px;
     background-color: rgb(65, 65, 65);
     border-radius: 10px;
+    position: absolute;
+    bottom: 590px;
+
 }
 .form_fin {
     color: rgb(255, 255, 255);
@@ -53,6 +57,9 @@
     margin-bottom: 3px;
     background-color: rgb(65, 65, 65);
     border-radius: 10px;
+    position: absolute;
+    bottom: 590px;
+    right: 450px;
 }
 
 #b_reserver {
@@ -64,11 +71,11 @@
     font-size: 20px;
     font-weight: 600;
     margin-top: 10px;
-    margin-left: 350px;
+
 }
 #reserve {
     justify-content:space-between;
-    margin-bottom: 20px;
+    margin-bottom: 119px;
 }
 #d {
     width: 300px;
@@ -77,9 +84,7 @@
 #f {
     width: 300px;
 }
-#c {
-    width: 800px;
-}
+
 #type {
     justify-content:space-between;
     margin-bottom: 20px;

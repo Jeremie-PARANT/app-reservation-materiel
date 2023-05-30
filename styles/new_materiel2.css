@@ -36,3 +36,27 @@
     margin-top: 20px;
     margin-left: 250px;
 }
+
+#div_info{
+    display: flex;
+    margin-top: 30px;
+}
+
+#Nom_mat{
+    display: flex;
+    margin-right: 250px;
+}
+
+#type_mat{
+    display: flex;
+    margin-right: 250px;
+}
+
+#ref_mat {
+    display: flex;
+    
+}
+
+#description {
+    display: flex;
+}
