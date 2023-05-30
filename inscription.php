@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    
     <?php include_once('includes/header_authentication.php'); ?>
 
 
@@ -110,7 +111,9 @@
             }
         }
     ?>
+    
     <?php include_once('includes/footer.php'); ?>
+    
 </body>
 
 </html>
