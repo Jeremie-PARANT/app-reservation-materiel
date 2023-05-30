@@ -19,7 +19,7 @@
         include_once('includes/header.php');
 
         //BARRE DE RECHERCHE
-        echo '<form action="materiel.php" method="post">
+        echo '<form class="rech_droite" action="materiel.php" method="post">
         <div class="form_txt">Recherche :</div><input type="text" name="nom_materiel">
         </form>';
         if (!empty($_POST['nom_materiel'])){
