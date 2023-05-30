@@ -6,6 +6,7 @@ header {
     justify-content: center;
     height: 50px;
     background-color: #09A491;
+    width: 100%;
 }
 .img3 {
     margin-left: 30px;

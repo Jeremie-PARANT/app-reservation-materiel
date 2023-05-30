@@ -5,6 +5,7 @@ header {
     justify-content: center;
     height: 50px;
     background-color: #09A491;
+    width: 100%;
 }
 img {
     padding-left: 1300px;

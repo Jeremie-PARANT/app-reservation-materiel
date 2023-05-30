@@ -6,171 +6,103 @@
 <title>Ajouter du matériel</title>
 <?php
     include_once('includes/fonction_mat.php');
+    include_once('includes/variable.php');
 ?>
 </head>
 <body>
-<header>
+<?php 
 
-    <!--Ceci est la navbar de la page et il en reste à la fin-->
-    <div id="container">
-        <div>
-            <img id="logo_univ" src="ressource/logo_univ.png" alt="logo université">
-        </div>
-        <div id="nav">
-            <div class="menu">
-                <a class="bouton_menu" href="materiel.php">Matériel</a>
-            </div>
-            <div class="menu">
-                <a class="bouton_menu" href="demande.html">Mes demandes</a>
-            </div>
+            //Début Formulaire nouveau matériel
+            echo "<form action='new_materiel.php' method='post'>
+    <div id=\"div_formulaire\">
 
-
-
-            <!--Début de la session php-->
-            <?php
-            session_start();
-
-
-
-
-            //Connexion à la base de données
-            $link = mysqli_connect("localhost", "root", "", "sae_203");
-            $mail = $_SESSION['mail'];
-            $query = "SELECT autorisation FROM utilisateurs WHERE mail='$mail';";
-            $result = mysqli_query($link, $query);
-
-
-
-            if ($result === false) {
-                // Gérer l'erreur ici, par exemple afficher un message d'erreur à l'utilisateur
-                echo "Erreur lors de l'exécution de la requête : " . mysqli_error($link);
-            } else {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    if ($row['autorisation'] == '1') {
-                        echo "<div class='menu'>";
-
-                        //Boutons Admin NavBar qui permettent d'aller sur d'autres pages
-                        echo "<a class='bouton_menu' href='validation.html'>Validation</a>";
-                        echo "</div>";
-                        echo "<div class='menu'>";
-                        echo "<a class='bouton_menu' href='new_materiel.php'>Ajout de Matériel</a>";
-                        echo "</div>";
-                    }
-                }
-            }
-            ?>
-        </div>
-
-
-
-        <!--Continuité de la navbar (logo compte)-->
-        <div id="menu_logo">
-                <img id="logo_compte" src="ressource/logo_compte.png" alt="logo compte">
-            </div>
-    </div>
-</header> <!--Fin du header-->
-
-
-
-
-            <!--Début Formulaire nouveau matériel-->
-<form action='new_materiel.php' method='post'>
-    <div id="div_formulaire">
-
-        <div id="titre">
+        <div id=\"titre\">
             <p>Information sur le matériel : </p>
-        </div>
+        </div>";
+
+
+
+        //Contenu des informations pour remplir le Formulaire
+        echo "<div id=\"container\">
+            <div id=\"div_info\">";
 
 
 
 
-        <!--Contenu des informations pour remplir le Formulaire-->
-        <div id="container">
-            <div id="div_info">
-
-
-
-
-                <!--Inserer le Nom du matériel-->
-                <p>Nom : </p>
-                <input class="champs_info" type="text" name="nom" required="required">
-                <?php 
+                //Inserer le Nom du matériel
+                echo "<p>Nom : </p>
+                <input class=\"champs_info\" type=\"text\" name=\"nom\" required=\"required\">";
                 $erreur_nom=noms(); // erreur de noms 
                 if ($erreur_nom!=false){
                 echo $erreur_nom;
                 }   
-                ?>
-                <br>
-                <br>
+                echo "<br>
+                <br>";
 
 
 
 
-                <!--Inserer le Type du matériel, on peux ajouter si besoin-->
-                <p>Type : </p>
-                <select class="champs_info" name="type" required="required">
-                    <option value="">-- Type de matériel --</option>
-                    <option value="camera">Caméra</option>
-                    <option value="micro">micro</option>
-                    <option value="light">light</option>
-                    <option value="Trépied">Trépied</option>
+                //Inserer le Type du matériel, on peux ajouter si besoin
+                echo "<p>Type : </p>
+                <select class=\"champs_info\" name=\"type\" required=\"required\">
+                    <option value=\"\">-- Type de matériel --</option>
+                    <option value=\"camera\">Caméra</option>
+                    <option value=\"micro\">micro</option>
+                    <option value=\"light\">light</option>
+                    <option value=\"Trépied\">Trépied</option>
                 </select>
     
                 <br>
-                <br>
+                <br>";
 
 
 
-                <!--Inserer la Réference du matériel (que des chiffres)-->
-                <p>Référence : </p>
-                <input class="champs_info" type="text" name="reference" required="required">
+                //Inserer la Réference du matériel (que des chiffres)
+                echo "<p>Référence : </p>
+                <input class=\"champs_info\" type=\"text\" name=\"reference\" required=\"required\">";
                 
-                <?php
+
                 $erreur_reference=reference(); // erreur de noms 
                 if ($erreur_reference!=false){
                 echo $erreur_reference;
                 }
-                ?>
+
             
-        </div>
+            echo "</div>";
 
 
 
-            <!--Ajouter une description au matériel-->
-            <div id="description">
+            //Ajouter une description au matériel
+            echo "<div id=\"description\">
 
                 <p>Description : </p>
-                <textarea id="champs" type="text" name="description" size="10" required="required"></textarea>
-            <?php
+                <textarea id=\"champs\" type=\"text\" name=\"description\" size=\"10\" required=\"required\"></textarea>";
+
             $erreur_description=description(); // erreur de noms 
             if ($erreur_description!=false){
             echo $erreur_description;
             }
-            ?>
-            </div> 
+
+            echo "</div> 
         </div>
         <br>
-        <br>
+        <br>";
 
 
 
-                <!--Bouton pour ajouter le matériel à la BDD-->
-        <div id="div_boutton">
-            <button type="submit" id="boutton_ajout">Ajouter nouveau matériel</button>
+                //Bouton pour ajouter le matériel à la BDD
+        echo "<div id=\"div_boutton\">
+            <button type=\"submit\" id=\"boutton_ajout\">Ajouter nouveau matériel</button>
         </div>
     </div>
 </form>
-</div> <!--Fin du Formulaire-->
+</div> ";//Fin du Formulaire
 
 
 
 
-            <!--Code qui permet d'ajouter le matériel-->
-<?php
+            //Code qui permet d'ajouter le matériel
 
-
-
-    $mail = $_SESSION['mail'];
     
 
     //Définir les matériels et ne pas pouvoir les modifier
