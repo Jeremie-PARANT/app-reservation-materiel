@@ -34,7 +34,7 @@ else{
                 $description = htmlspecialchars($row_current_material['description']);
                 
                 //Tableau
-                echo '<div class="reserve">Réservation en attente</div>
+                echo '<div class="reserve">Détails</div>
                 <table>';
                 echo '<tr> <td>' . image($type) . '</td><td>'. $nom .'</br>'. $type .'</br>'. $reference .'</br>'. $description .'</br>';
                 echo ' </tr> </table> ' ;

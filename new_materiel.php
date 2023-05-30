@@ -9,7 +9,7 @@
     include_once('includes/fonction_mat.php');
     include_once('includes/variable.php');
     include_once('includes/header.php');
-    include_once('includes/footer.php');
+    
 ?>
 </head>
 <body>
@@ -171,10 +171,10 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 }   
 }
-include_once('includes/footer.php');
+
 }
 
-
+include_once('includes/footer.php');
 
 ?>
 </body>

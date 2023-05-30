@@ -5,16 +5,18 @@
 }
 
 body {
-    width: 100% ;
+    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  
 }
 
 footer {
-    display: flex;
+    
     background-color: #2E3494;
-    position: absolute;
-    bottom: 0;
-    width: 98.69%;
-
+    margin-top: auto;
+    width: auto;
     justify-content: right;
     padding-right: 25px;
 }
@@ -28,7 +30,13 @@ a {
 }
 
 
+.vide {
+    min-height: 50px;
+}
+
+
 </style>
+<div class='vide'></div>
 <footer>
     <img src="images/logoIUT.jpg" class="img2"/>
 </footer>
