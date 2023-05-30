@@ -22,18 +22,17 @@ if (empty($_SESSION['mail'])){ //Vérifie connection
 }
 else{
 
-            //Début Formulaire nouveau matériel
-            echo "<form action='new_materiel.php' method='post'>
-    <div id=\"div_formulaire\">
+           
 
-        <div id=\"titre\">
+       echo  "<div id=\"titre\">
             <p>Information sur le matériel : </p>
         </div>";
 
+ //Début Formulaire nouveau matériel
+           echo "<form action='new_materiel.php' method='post'>
+    <div id=\"div_formulaire\">
 
-
-        //Contenu des informations pour remplir le Formulaire
-        echo "<div id=\"container\">
+             <div id=\"container\">
             <div id=\"div_info\">";
 
 
@@ -105,7 +104,7 @@ else{
 
                 //Bouton pour ajouter le matériel à la BDD
         echo "<div id=\"div_boutton\">
-            <button type=\"submit\" id=\"boutton_ajout\">Ajouter nouveau matériel</button>
+            <button type=\"submit\" class=\"boutton_ajout\">Ajouter nouveau matériel</button>
         </div>
     </div>
 </form>
