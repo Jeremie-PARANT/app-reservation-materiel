@@ -273,15 +273,25 @@ function reservation_collide(){
             $date_fin = htmlspecialchars($_POST['date_fin']);
 
             $erreur_date_collide = '<div class="erreur"> Ce matériel a déjà été reserver au date suivante : <ul>';
+            $compteur = 0;
             if (mysqli_num_rows($result_check_reservation) > 0) {
                 while ($row_check_reservation = mysqli_fetch_assoc($result_check_reservation)){
-                    if ($row_check_reservation['datedebut'] <= $date_debut && $row_check_reservation['datefin'] >= $date_debut OR $row_check_reservation['datedebut'] <= $date_fin && $row_check_reservation['datefin'] >= $date_debut){
+                    if ($row_check_reservation['datedebut'] <= $date_debut && $row_check_reservation['datefin'] >= $date_debut 
+                    OR $row_check_reservation['datedebut'] <= $date_fin && $row_check_reservation['datefin'] >= $date_debut 
+                    OR $date_debut < $row_check_reservation['datedebut'] && $date_fin > $row_check_reservation['datefin']){
                         $erreur_date_collide = $erreur_date_collide . '<li>' . $row_check_reservation['datedebut'] . ', '. $row_check_reservation['datefin'] . '</li>';
+                        $compteur = $compteur + 1;
                     }
+                    $erreur_date_collide = $erreur_date_collide . '</ul></div>';
                 }
-            $erreur_date_collide = $erreur_date_collide . '</ul></div>';
-            return $erreur_date_collide;
+                if ($compteur > 0) {
+                    return $erreur_date_collide;
+                }
+                else {
+                    return false;
+                }
             }
+
             else {
                 return false;
             }
