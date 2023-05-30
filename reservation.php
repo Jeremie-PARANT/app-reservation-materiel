@@ -22,6 +22,9 @@ else { //FORMULAIRE
     include_once('includes/variable.php');
     include_once('includes/fonction.php');
     include_once('includes/header.php');
+     
+
+    
    
     
 
@@ -40,7 +43,8 @@ else { //FORMULAIRE
 
 
     //DATE
-    //Date debut 
+    //Date debut
+    
     echo '</select>
     <div id=reserve><span class="form_debut">Date de début : <input id=d type="date" name="date_debut" required="required"></span>';
     $erreur_date_debut=date_debut();// erreur de date_debut 
@@ -99,7 +103,9 @@ else { //FORMULAIRE
     }
 
 
-    //include_once('includes/footer.php');
+    
 }
 
-?></body>
+?>
+
+</body>
