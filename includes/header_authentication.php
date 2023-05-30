@@ -31,7 +31,10 @@ a {
 </style>
 
 <header>
+
     <img src="images/avatar.png" />
+
+
     <a href="index.php"><div class="connexion">Connexion</div></a>
     
 </header>

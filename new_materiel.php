@@ -171,6 +171,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 }   
 }
+include_once('includes/footer.php');
 }
 
 

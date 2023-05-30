@@ -131,7 +131,7 @@
                     . $type ."</br>"
                     . $user_mail ."</br>"
                     . $date_debut ." : ". $date_fin .
-                    "</br><div class=\"attente\"> en attente </div></br>";
+                    "</br><div class=\"attente\"> en attente </div>";
 
                     //details de la reservation
                     echo "<a href=\"reservation_details.php?numreserv=". $numreserv ."\"><div class=\"details\">details</div></a>" . "</TD>" ;
@@ -171,10 +171,10 @@
 
                     //echo demande (validation)
                     if ($demande == 'accepte'){
-                        echo '<div class="accepte"> acceptée </div></br>';
+                        echo '<div class="accepte"> acceptée </div>';
                     }
                     elseif ($demande == 'refuse'){
-                        echo '<div class="refuse"> refusée </div></br>';
+                        echo '<div class="refuse"> refusée </div>';
                     }
                     else {
                         echo '<div class="erreur"> demande incorrecte </div>';
