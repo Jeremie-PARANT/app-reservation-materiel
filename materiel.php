@@ -19,9 +19,10 @@
         include_once('includes/header.php');
 
         //BARRE DE RECHERCHE
-        echo '<form action="materiel.php" method="post">
-        <div class="form_txt">Recherche :</div><input type="text" name="nom_materiel">
+        echo '<form class="rech_form" action="materiel.php" method="post">
+        <div class="rech_txt">Recherche :</div><input class="rech_input" type="text" name="nom_materiel">
         </form>';
+
         if (!empty($_POST['nom_materiel'])){
             $nom_materiel = mysqli_real_escape_string($link, $_POST['nom_materiel']);
         }
