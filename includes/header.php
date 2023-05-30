@@ -3,6 +3,8 @@
 margin: 0;
 padding: 0;
 }
+
+
 header {
 position: sticky;
 display: flex;
@@ -13,8 +15,7 @@ background-color: #09A491;
 .img3 {
 margin-left: 30px;
 margin-top: 10px;
-padding-right : 10px;
-padding-left : 10px;
+
 width : 30px;
 height : 30px;
 
@@ -105,7 +106,7 @@ margin-top: 6px;
 
 }
 
-.menu-item {
+#menu-item {
 background-color: #09A491;
 text-align: center;
 color: white;
@@ -135,6 +136,14 @@ color: black;
 background-color: white;
 }
 
+.bouton{
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 25px;
+  color: white;
+}
+
 </style>
 
 <header> 
@@ -154,10 +163,14 @@ background-color: white;
 <div id='transition'>
 <img src="images/avatar.png" class="img3"/> 
         <div id='menu'> 
-    <div class="menu-item">Déconnexion</div> 
-    
+    <div id="menu-item">
+      <form action="includes/logout.php" method="post">
+        <input type="submit" class="bouton" value="Déconnexion">
+      </form>
+    </div> 
     </div>
 </div> 
+
 
 
 </header>
