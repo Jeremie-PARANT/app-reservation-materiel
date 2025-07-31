@@ -11,6 +11,6 @@ Il s’agit de notre **premier vrai projet web réalisé en groupe**. Ce travail
 - Réservation de matériel sur une période choisie
 
 ## Contribution
-Jérémie PARANT - Développement
-Ruben De Abreu - Développement
+Jérémie PARANT - Développement  
+Ruben De Abreu - Développement  
 Morgane Le Normand - Maquette
